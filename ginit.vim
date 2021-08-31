@@ -1,3 +1,31 @@
+" Enable Mouse
+set mouse=a
+
+if exists('g:GtkGuiLoaded')
+    call rpcnotify(1, 'Gui', 'Font', 'Fira Code Medium 9')
+endif
+
+" Disable GUI Tabline
+if exists(':GuiTabline')
+    GuiTabline 0
+endif
+
+" Disable GUI Popupmenu
+if exists(':GuiPopupmenu')
+    GuiPopupmenu 0
+endif
+
+" Enable GUI ScrollBar
+if exists(':GuiScrollBar')
+    GuiScrollBar 1
+endif
+
+" Right Click Context Menu (Copy-Cut-Paste)
+nnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>
+inoremap <silent><RightMouse> <Esc>:call GuiShowContextMenu()<CR>
+xnoremap <silent><RightMouse> :call GuiShowContextMenu()<CR>gv
+snoremap <silent><RightMouse> <C-G>:call GuiShowContextMenu()<CR>gv
+
 call plug#begin('~/.vim/plugged')
 
 "{{ Theme }}
@@ -7,6 +35,8 @@ call plug#begin('~/.vim/plugged')
 "{{ File browser }}
     Plug 'preservim/nerdtree' |
             \ Plug 'Xuyuanp/nerdtree-git-plugin' |
+            \ Plug 'ryanoasis/vim-devicons'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " {{ File search}}
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -35,6 +65,10 @@ syntax on
 colorscheme dracula
 
 set termguicolors
+
+if has("gui_running")
+    set guifont=Consolas:h11:cANSI
+endif
 
 set clipboard^=unnamed,unnamedplus
 
@@ -75,5 +109,5 @@ tnoremap   <silent>   <F12>   <C-\><C-n>:FloatermKill<CR>
 let nvim_settings_dir = '~/.config/nvim/settings/'
 execute 'source'.nvim_settings_dir.'nerdtree.vim'
 execute 'source'.nvim_settings_dir.'fzf.vim'
-"execute 'source'.nvim_settings_dir.'coc.vim'
+execute 'source'.nvim_settings_dir.'coc.vim'
 
