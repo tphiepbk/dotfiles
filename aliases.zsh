@@ -1,13 +1,16 @@
 alias ll="ls -lah"
 alias cls="clear"
 
-alias desktop="cd /mnt/c/Users/itman/Desktop"
-alias download="cd /mnt/c/Users/itman/Downloads"
+alias desktop="cd ~/Desktop"
+alias download="cd ~/Downloads"
+alias nvimsetting="cd ~/.config/nvim"
 
 alias zshconf="nvim ~/.zshrc"
 alias zshreload="source ~/.zshrc"
 alias aliasconf="nvim $ZSH_CUSTOM/aliases.zsh"
 alias nvimconf="nvim ~/.config/nvim/init.vim"
+
+alias nv="nvim-gtk"
 
 alias update="sudo apt-get update"
 alias upgrade="sudo apt-get upgrade"
@@ -47,3 +50,11 @@ alias stopmysql="sudo service mysql stop"
 alias mysqluser="mysql -u tphiepbk -p"
 
 alias weather="curl wttr.in/hochiminh"
+
+alias dekvpn="sudo openvpn --config /root/intern02.ovpn"
+
+alias kctl="kubectl"
+
+alias disabletouchpad="xinput set-prop 15 \"Device Enabled\" 0"
+alias enabletouchpad="xinput set-prop 15 \"Device Enabled\" 1"
+
