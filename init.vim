@@ -1,3 +1,5 @@
+let g:python3_host_prog = '/usr/bin/python3'
+
 call plug#begin('~/.vim/plugged')
 
 "{{ Theme }}
@@ -60,9 +62,6 @@ call plug#begin('~/.vim/plugged')
 " {{ Debugger }}
     Plug 'puremourning/vimspector'
 
-" {{ Latex }}
-    Plug 'lervag/vimtex'
-
 " {{ Autosave }}
     Plug '907th/vim-auto-save'
 
@@ -76,7 +75,7 @@ colorscheme ghdark
 if exists('g:GtkGuiLoaded')
   " some code here
     call rpcnotify(1, 'Gui', 'Option', 'Tabline', 0)
-    call rpcnotify(1, 'Gui', 'Font', 'Fira Code Nerd Font SemiBold 9')
+    call rpcnotify(1, 'Gui', 'Font', 'CaskaydiaCove Nerd Font 11')
     call rpcnotify(1, 'Gui', 'Option', 'Popupmenu', 0)
     call rpcnotify(1, 'Gui', 'Option', 'Cmdline', 0)
 
@@ -227,5 +226,4 @@ let nvim_settings_dir = '~/.config/nvim/settings/'
 execute 'source'.nvim_settings_dir.'nerdtree.vim'
 execute 'source'.nvim_settings_dir.'fzf.vim'
 execute 'source'.nvim_settings_dir.'coc.vim'
-" execute 'source'.nvim_settings_dir.'vimtex.vim'
 
