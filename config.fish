@@ -38,3 +38,8 @@ alias glogp="git log --pretty=format:\"%h %ad%x09%an%x09%s\" --date=short"
 alias weather="curl wttr.in/hochiminh"
 
 export PATH="/mnt/c/Users/thanh/AppData/Local/Programs/Microsoft VS Code/bin:$PATH"
+
+set -U fish_key_bindings fish_vi_key_bindings
+set -U budspencer_nogreeting
+set -U budspencer_nobell
+set -U budspencer_pwdstyle "long"
