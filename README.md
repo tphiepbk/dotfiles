@@ -22,12 +22,12 @@
 + ***ripgrep***: ripgrep recursively searches directories for a regex pattern while respecting your gitignore - https://github.com/BurntSushi/ripgrep
 + ***fd***: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
 
-### Neovim
+### Neovim (version 0.8.3)
 
-### Packages manager:
-+ packer.nvim: A use-package inspired plugin manager for Neovim. Uses native packages, supports Luarocks dependencies, written in Lua, allows for expressive config - https://github.com/wbthomason/packer.nvim
+#### Packages manager:
++ ***packer.nvim***: A use-package inspired plugin manager for Neovim. Uses native packages, supports Luarocks dependencies, written in Lua, allows for expressive config - https://github.com/wbthomason/packer.nvim
 
-### Packages:
+#### Packages:
 + ***plenary.nvim***: plenary: full; complete; entire; absolute; unqualified. All the lua functions I don't want to write twice - https://github.com/nvim-lua/plenary.nvim
 + ***auto-save.nvim***: Automatically save your changes in NeoVim - https://github.com/Pocco81/auto-save.nvim
 + ***Comment.nvim***: Smart and powerful comment plugin for neovim. Supports treesitter, dot repeat, left-right/up-down motions, hooks, and more - https://github.com/numToStr/Comment.nvim
@@ -66,3 +66,5 @@
 + python
 + vim
 + yaml
+
+## Many thanks to all developers, appreciate it :D
