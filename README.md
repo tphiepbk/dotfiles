@@ -1,6 +1,6 @@
-# TPHIEPBK'S CONFIGURATION
+## TPHIEPBK'S CONFIGURATION
 
-## Needed npm packages
+### Needed npm packages
 
 /usr/lib</br>
 ├── bash-language-server@4.8.3</br>
@@ -13,7 +13,7 @@
 ├── yaml-language-server@1.12.0</br>
 └── yarn@1.22.19</br>
 
-## External opensource utilities
+### External opensource utilities
 
 + exa: A modern replacement for 'ls' - https://github.com/ogham/exa
 + bat: A cat(1) clone with wings - https://github.com/sharkdp/bat
@@ -21,3 +21,16 @@
 + fzf: A command-line fuzzy finder - https://github.com/junegunn/fzf
 + ripgrep: ripgrep recursively searches directories for a regex pattern while respecting your gitignore - https://github.com/BurntSushi/ripgrep
 + fd: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
+
+### Neovim
+
+#### Treesitter parsers/features (using `:TSInstall`)
++ bash
++ c
++ cpp
++ dockerfile
++ help
++ lua
++ python
++ vim
++ yaml
