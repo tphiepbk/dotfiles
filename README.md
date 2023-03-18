@@ -67,4 +67,5 @@
 + vim
 + yaml
 
-## Many thanks to all developers, appreciate it :D
+### Inspired by: https://github.com/craftzdog/dotfiles-public
+### Many thanks to all developers, appreciate it :D
