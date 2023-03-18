@@ -18,3 +18,4 @@
 + exa: A modern replacement for 'ls' - https://github.com/ogham/exa
 + bat: A cat(1) clone with wings - https://github.com/sharkdp/bat
 + glow: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
++ fzf: A command-line fuzzy finder - https://github.com/junegunn/fzf
