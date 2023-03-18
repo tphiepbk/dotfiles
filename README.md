@@ -1,3 +1,7 @@
+# TPHIEPBK'S CONFIGURATION
+
+## Needed npm packages
+
 /usr/lib
 ├── bash-language-server@4.8.3
 ├── corepack@0.15.3
@@ -9,3 +13,7 @@
 ├── yaml-language-server@1.12.0
 └── yarn@1.22.19
 
+## Used tools
+
++ exa: A modern replacement for 'ls' - https://github.com/ogham/exa
++ bat: A cat(1) clone with wings - https://github.com/sharkdp/bat
