@@ -19,3 +19,5 @@
 + bat: A cat(1) clone with wings - https://github.com/sharkdp/bat
 + glow: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
 + fzf: A command-line fuzzy finder - https://github.com/junegunn/fzf
++ ripgrep: ripgrep recursively searches directories for a regex pattern while respecting your gitignore - https://github.com/BurntSushi/ripgrep
++ fd: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
