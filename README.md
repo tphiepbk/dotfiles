@@ -3,17 +3,18 @@
 ## Needed npm packages
 
 /usr/lib
-├── bash-language-server@4.8.3
-├── corepack@0.15.3
-├── dockerfile-language-server-nodejs@0.9.0
-├── neovim@4.10.1
-├── npm@9.6.2
-├── pyright@1.1.299
-├── vscode-langservers-extracted@4.6.0
-├── yaml-language-server@1.12.0
-└── yarn@1.22.19
+├── bash-language-server@4.8.3</br>
+├── corepack@0.15.3</br>
+├── dockerfile-language-server-nodejs@0.9.0</br>
+├── neovim@4.10.1</br>
+├── npm@9.6.2</br>
+├── pyright@1.1.299</br>
+├── vscode-langservers-extracted@4.6.0</br>
+├── yaml-language-server@1.12.0</br>
+└── yarn@1.22.19</br>
 
 ## Used tools
 
 + exa: A modern replacement for 'ls' - https://github.com/ogham/exa
 + bat: A cat(1) clone with wings - https://github.com/sharkdp/bat
++ glow: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
