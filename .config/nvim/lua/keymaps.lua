@@ -52,8 +52,7 @@ keymap("v", ">", ">gv", opts)
 
 -- Switch and close tabs
 keymap("n", "<Tab>", ":bn<CR>", opts)
-keymap("n", "<S-Tab>", ":bp<CR>", opts)
-keymap("n", "<C-w>", ":bd<CR>", opts)
+keymap("n", "<Leader><Tab>", ":bp<CR>", opts)
 
 -- Source current file
 keymap("n", "<Leader>vr", ":source %<CR>", opts)
