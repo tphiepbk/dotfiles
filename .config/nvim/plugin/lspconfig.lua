@@ -97,19 +97,37 @@ protocol.CompletionItemKind = {
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-nvim_lsp['pyright'].setup{
+nvim_lsp['pyright'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
 }
 
-nvim_lsp['bashls'].setup{
+nvim_lsp['bashls'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities,
+}
+
+nvim_lsp['clangd'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
 }
 
-nvim_lsp['clangd'].setup{
+nvim_lsp['dockerls'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
+nvim_lsp['yamlls'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
+nvim_lsp['jsonls'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities
