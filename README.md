@@ -2,7 +2,7 @@
 
 ## Needed npm packages
 
-/usr/lib
+/usr/lib</br>
 ├── bash-language-server@4.8.3</br>
 ├── corepack@0.15.3</br>
 ├── dockerfile-language-server-nodejs@0.9.0</br>
@@ -13,7 +13,7 @@
 ├── yaml-language-server@1.12.0</br>
 └── yarn@1.22.19</br>
 
-## Used tools
+## External opensource utilities
 
 + exa: A modern replacement for 'ls' - https://github.com/ogham/exa
 + bat: A cat(1) clone with wings - https://github.com/sharkdp/bat
