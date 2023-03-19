@@ -127,7 +127,19 @@ nvim_lsp['yamlls'].setup {
     capabilities = capabilities
 }
 
+nvim_lsp['rust_analyzer'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
 nvim_lsp['jsonls'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+}
+
+nvim_lsp['gopls'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
     capabilities = capabilities

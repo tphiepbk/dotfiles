@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias docker="sudo docker"
 alias ll="exa -laahF --group --color=always --icons --time-style=long-iso"
 alias l="exa -laahF --group --color=always --icons --time-style=long-iso"
@@ -12,3 +14,12 @@ alias upgrade="sudo apt-get upgrade"
 alias startdocker="sudo service docker start"
 alias download="cd /home/tphiepbk/Downloads/"
 alias bat="batcat"
+
+# Set PATH so it can use Go and its necessary tools
+if [ -d "/usr/local/go/bin" ]; then
+    export PATH="/usr/local/go/bin:$PATH"
+fi
+
+if [ -d "$HOME/go/bin" ]; then
+    export PATH="$HOME/go/bin:$PATH"
+fi
