@@ -22,6 +22,7 @@
 + ***fzf***: A command-line fuzzy finder - https://github.com/junegunn/fzf
 + ***ripgrep***: ripgrep recursively searches directories for a regex pattern while respecting your gitignore - https://github.com/BurntSushi/ripgrep
 + ***fd***: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
++ ***LS_COLORS***: A collection of LS_COLORS definitions; needs your contribution! - https://github.com/trapd00r/LS\_COLORS
 
 ### Neovim (version 0.8.3)
 
