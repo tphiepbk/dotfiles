@@ -9,6 +9,7 @@
 ├── neovim@4.10.1</br>
 ├── npm@9.6.2</br>
 ├── pyright@1.1.299</br>
+├── tree-sitter-cli@0.20.7</br>
 ├── vscode-langservers-extracted@4.6.0</br>
 ├── yaml-language-server@1.12.0</br>
 └── yarn@1.22.19</br>
