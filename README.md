@@ -69,5 +69,10 @@
 + vim
 + yaml
 
+### Some images
+![Neovim screenshot 1](images/neovim1.png)
+
+![Neovim screenshot 2](images/neovim2.png)
+
 ### Inspired by: https://github.com/craftzdog/dotfiles-public
 ### Many thanks to all developers, appreciate it :D
