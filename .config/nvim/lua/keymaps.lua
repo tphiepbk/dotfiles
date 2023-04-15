@@ -7,7 +7,7 @@
 --   command_mode = "c",
 
 local keymap = vim.keymap.set
-local opts = { noremap = true, silent = false }
+local opts = { noremap = true, silent = true }
 
 -- Set map leader key
 vim.g.mapleader = ","
@@ -51,8 +51,9 @@ keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
 -- Switch and close tabs
-keymap("n", "<Tab>", ":bn<CR>", opts)
-keymap("n", "<Leader><Tab>", ":bp<CR>", opts)
+keymap("n", "<tab>", ":bn<CR>", opts)
+keymap("n", "<S-tab>", ":bp<CR>", opts)
+keymap("n", "<Leader>bd", ":bd%<CR>", opts)
 
 -- Source current file
 keymap("n", "<Leader>vr", ":source %<CR>", opts)
