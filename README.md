@@ -23,7 +23,7 @@
 + ***ripgrep***: ripgrep recursively searches directories for a regex pattern while respecting your gitignore - https://github.com/BurntSushi/ripgrep
 + ***fd***: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
 
-### Neovim (version 0.8.3)
+### Neovim (version 0.9.5)
 
 Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations
 
