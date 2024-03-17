@@ -1,3 +1,6 @@
+local yellow = '#ffff00'
+local current_selected_tab_text_color = yellow
+
 return {
   {
     'akinsho/bufferline.nvim',
@@ -13,6 +16,13 @@ return {
         show_buffer_close_icons = false,
 				show_close_icon = false,
       },
+      highlights = {
+        buffer_selected = {
+            fg = current_selected_tab_text_color,
+            bold = true,
+            italic = false
+        },
+      }
     }
   }
 }
