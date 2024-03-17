@@ -50,7 +50,7 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 │   │   ├── dashboard.lua</br>
 │   │   ├── lsp_config.lua</br>
 │   │   └── incline.lua</br>
-│   └── config
+│   └── config</br>
 │       ├── options.lua</br>
 │       ├── autocmds.lua</br>
 │       ├── keymaps.lua</br>
@@ -62,9 +62,10 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 └── LICENSE</br>
 
 ### Screenshots
-![Neovim screenshot 1](images/neovim1.png)
 
 Visit http://patorjk.com/software/taag to get cool string like this.
+
+![Neovim screenshot 1](images/neovim1.png)
 
 ![Neovim screenshot 2](images/neovim2.png)
 
