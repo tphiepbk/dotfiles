@@ -32,5 +32,7 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations
 
 ![Neovim screenshot 2](images/neovim2.png)
 
+![Neovim screenshot 3](images/neovim3.png)
+
 ### Inspired by: https://github.com/craftzdog/dotfiles-public
 ### Many thanks to all developers, appreciate it :D

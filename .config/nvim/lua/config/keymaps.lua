@@ -42,11 +42,6 @@ keymap.set("n", "<C-w><Down>", "<C-w>+")
 keymap.set("v", "<", "<gv", opts)
 keymap.set("v", ">", ">gv", opts)
 
--- Tabs movement
-keymap.set("n", "te", ":tabedit<Return>", opts)
-keymap.set("n", "<tab>", ":tabnext<Return>", opts)
-keymap.set("n", "<S-tab>", ":tabprev<Return>", opts)
-
 -- Quick save
 keymap.set("n", "<Leader>ww", ":w<CR>", opts)
 

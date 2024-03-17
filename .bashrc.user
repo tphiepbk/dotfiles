@@ -28,3 +28,4 @@ alias tmuxconf="nvim ~/.tmux.conf"
 alias vim="nvim"
 alias vimf="nvim \$(fzf)"
 alias nvimf="nvim \$(fzf)"
+
