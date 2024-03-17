@@ -1,25 +1,30 @@
 #!/bin/bash
 
-alias docker="sudo docker"
-alias ll="exa -laahF --group --color=always --icons --time-style=long-iso"
-alias l="exa -laahF --group --color=always --icons --time-style=long-iso"
-alias cls="clear"
-alias bashconf="nvim /home/tphiepbk/.bashrc.user"
-alias bashreload="source /home/tphiepbk/.bashrc.user"
-alias working="cd /home/tphiepbk/WORKING"
-alias repo="cd /home/tphiepbk/REPOSITORIES/"
-alias install="sudo apt-get install"
-alias update="sudo apt-get update"
-alias upgrade="sudo apt-get upgrade"
-alias startdocker="sudo service docker start"
-alias download="cd /home/tphiepbk/Downloads/"
-alias bat="batcat"
-
-# Set PATH so it can use Go and its necessary tools
-if [ -d "/usr/local/go/bin" ]; then
-    export PATH="/usr/local/go/bin:$PATH"
+COMMON_BINARY_PATH="/home/tphiepbk/.prebuilt/bin"
+if [[ ! "$PATH" =~ .*"$COMMON_BINARY_PATH".* ]]; then
+	export PATH="$PATH:$COMMON_BINARY_PATH"
 fi
 
-if [ -d "$HOME/go/bin" ]; then
-    export PATH="$HOME/go/bin:$PATH"
+NODEJS_PATH="/home/tphiepbk/.prebuilt/nodejs/bin"
+if [[ ! "$PATH" =~ .*"$NODEJS_PATH".* ]]; then
+	export PATH="$PATH:$NODEJS_PATH"
 fi
+
+PIP_PACKAGES_PATH="/home/tphiepbk/.local/bin"
+if [[ ! "$PATH" =~ .*"$PIP_PACKAGES_PATH".* ]]; then
+	export PATH="$PATH:$PIP_PACKAGES_PATH"
+fi
+
+export FZF_DEFAULT_OPTS="--height 70% --layout=reverse --border --preview 'bat --color=always {}' --preview-window '~3'"
+
+alias less="less -XR"
+
+alias ll="lsd -la --icon always --color always"
+alias l="lsd -la --icon always --color always"
+
+alias bashconf="nvim ~/.bashrc.user"
+alias bashreload="source ~/.bashrc.user"
+alias tmuxconf="nvim ~/.tmux.conf"
+alias vim="nvim"
+alias vimf="nvim \$(fzf)"
+alias nvimf="nvim \$(fzf)"
