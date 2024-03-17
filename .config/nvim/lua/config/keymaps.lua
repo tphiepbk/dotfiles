@@ -46,3 +46,4 @@ keymap.set("v", ">", ">gv", opts)
 keymap.set("n", "<Leader>qq", ":q<CR>", opts)
 keymap.set("n", "<Leader>qa", ":qa<CR>", opts)
 keymap.set("n", "<Leader>wq", ":wq<CR>", opts)
+

@@ -60,3 +60,4 @@ vim.api.nvim_set_hl(namespace, "CursorLineNr", {fg="#5fff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "Search", {fg="#00ff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "NonText", {fg="#767676", bg="None"})
 vim.api.nvim_set_hl(namespace, "SignColumn", {fg="#080808", bg="None"})
+

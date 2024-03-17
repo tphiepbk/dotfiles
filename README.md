@@ -1,11 +1,11 @@
-## TPHIEPBK'S CONFIGURATION
+# TPHIEPBK'S CONFIGURATION
 
-### Needed apt packages
+## Needed apt packages
 + python3.10-venv
 + rustc
 + ruby-full
 
-### Needed npm packages
+## Needed npm packages
 
 /home/tphiepbk/.prebuilt/nodejs/lib</br>
 ├── corepack@0.23.0</br>
@@ -15,7 +15,7 @@
 ├── npm@10.5.0</br>
 └── tree-sitter-cli@0.22.</br>
 
-### External opensource utilities
+## External opensource utilities
 
 + ***lsd***: The next gen ls command - https://github.com/lsd-rs/lsd
 + ***bat***: A cat(1) clone with wings - https://github.com/sharkdp/bat
@@ -24,7 +24,7 @@
 + ***fd***: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
 + ***glow***: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
 
-### Neovim (version 0.9.5)
+## Neovim (version 0.9.5)
 
 Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 
@@ -62,7 +62,24 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 ├── lazyvim.json</br>
 └── LICENSE</br>
 
-### Screenshots
+## Keymaps
+
+Leader key: `<Space>`
+
+| Leader | Key 1      | Key 2  | Action                     |
+|:------:|:----------:|:------:|:--------------------------:|
+| Yes    | `<Space>`  |        | Telescope find files       |
+| Yes    | `/`        |        | Telescope live grep        |
+| No     | `Alt`      | `jk`   | Move line(s)               |
+| No     | `Tab`      |        | Next tab                   |
+| No     | `Shift`    | `Tab`  | Previous tab               |
+| No     | `s`        | `s`    | Split windows horizontally |
+| No     | `s`        | `v`    | Split windows vertically   |
+| Yes    | `q`        | `q`    | Quit                       |
+| Yes    | `q`        | `a`    | Quit all                   |
+| Yes    | `w`        | `q`    | Save and quit              |
+
+## Screenshots
 
 Visit http://patorjk.com/software/taag to get cool string like this.
 
@@ -73,5 +90,5 @@ Visit http://patorjk.com/software/taag to get cool string like this.
 ![Neovim screenshot 3](images/neovim3.png)
 
 
-### Inspired by: https://github.com/craftzdog/dotfiles-public
-### Many thanks to all developers, appreciate it :D
+## Inspired by: https://github.com/craftzdog/dotfiles-public
+## Many thanks to all developers, appreciate it :D
