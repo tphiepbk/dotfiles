@@ -42,9 +42,6 @@ keymap.set("n", "<C-w><Down>", "<C-w>+")
 keymap.set("v", "<", "<gv", opts)
 keymap.set("v", ">", ">gv", opts)
 
--- Quick save
-keymap.set("n", "<Leader>ww", ":w<CR>", opts)
-
 -- Quit and save
 keymap.set("n", "<Leader>qq", ":q<CR>", opts)
 keymap.set("n", "<Leader>qa", ":qa<CR>", opts)
