@@ -48,6 +48,7 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 │   │   ├── notify.lua</br>
 │   │   ├── treesitter.lua</br>
 │   │   ├── dashboard.lua</br>
+│   │   ├── autosave.lua</br>
 │   │   ├── lsp_config.lua</br>
 │   │   └── incline.lua</br>
 │   └── config</br>
