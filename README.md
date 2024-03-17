@@ -28,40 +28,40 @@
 
 Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 
-Directory structure
+***Directory*** structure
 
-/home/tphiepbk/.config/nvim
-├── lazy-lock.json
-├── lua
-│   ├── plugins
-│   │   ├── noice.lua
-│   │   ├── mason.lua
-│   │   ├── bufferline.lua
-│   │   ├── lualine.lua
-│   │   ├── git.lua
-│   │   ├── mini_hipatterns.lua
-│   │   ├── telescope.lua
-│   │   ├── inc_rename.lua
-│   │   ├── colorscheme.lua
-│   │   ├── mini_animate.lua
-│   │   ├── flash.lua
-│   │   ├── notify.lua
-│   │   ├── treesitter.lua
-│   │   ├── dashboard.lua
-│   │   ├── lsp_config.lua
-│   │   └── incline.lua
+/home/tphiepbk/.config/nvim</br>
+├── lazy-lock.json</br>
+├── lua</br>
+│   ├── plugins</br>
+│   │   ├── noice.lua</br>
+│   │   ├── mason.lua</br>
+│   │   ├── bufferline.lua</br>
+│   │   ├── lualine.lua</br>
+│   │   ├── git.lua</br>
+│   │   ├── mini_hipatterns.lua</br>
+│   │   ├── telescope.lua</br>
+│   │   ├── inc_rename.lua</br>
+│   │   ├── colorscheme.lua</br>
+│   │   ├── mini_animate.lua</br>
+│   │   ├── flash.lua</br>
+│   │   ├── notify.lua</br>
+│   │   ├── treesitter.lua</br>
+│   │   ├── dashboard.lua</br>
+│   │   ├── lsp_config.lua</br>
+│   │   └── incline.lua</br>
 │   └── config
-│       ├── options.lua
-│       ├── autocmds.lua
-│       ├── keymaps.lua
-│       └── lazy.lua
-├── README.md
-├── stylua.toml
-├── init.lua
-├── lazyvim.json
-└── LICENSE
+│       ├── options.lua</br>
+│       ├── autocmds.lua</br>
+│       ├── keymaps.lua</br>
+│       └── lazy.lua</br>
+├── README.md</br>
+├── stylua.toml</br>
+├── init.lua</br>
+├── lazyvim.json</br>
+└── LICENSE</br>
 
-### Some images
+### Screenshots
 ![Neovim screenshot 1](images/neovim1.png)
 
 Visit http://patorjk.com/software/taag to get cool string like this.
