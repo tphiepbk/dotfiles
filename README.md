@@ -43,8 +43,6 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 │   │   ├── telescope.lua</br>
 │   │   ├── inc_rename.lua</br>
 │   │   ├── colorscheme.lua</br>
-│   │   ├── mini_animate.lua</br>
-│   │   ├── flash.lua</br>
 │   │   ├── notify.lua</br>
 │   │   ├── treesitter.lua</br>
 │   │   ├── dashboard.lua</br>
