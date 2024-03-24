@@ -41,8 +41,8 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 │   │   ├── git.lua</br>
 │   │   ├── mini_hipatterns.lua</br>
 │   │   ├── telescope.lua</br>
-│   │   ├── inc_rename.lua</br>
 │   │   ├── colorscheme.lua</br>
+│   │   ├── inc_rename.lua</br>
 │   │   ├── notify.lua</br>
 │   │   ├── treesitter.lua</br>
 │   │   ├── dashboard.lua</br>
@@ -76,6 +76,7 @@ Leader key: `<Space>`
 | Yes    | `q`        | `q`    | Quit                       |
 | Yes    | `q`        | `a`    | Quit all                   |
 | Yes    | `w`        | `q`    | Save and quit              |
+| Yes    | `r`        | `n`    | Incremental Rename         |
 
 ## Screenshots
 
