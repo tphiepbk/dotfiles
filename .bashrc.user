@@ -15,17 +15,25 @@ if [[ ! "$PATH" =~ .*"$PIP_PACKAGES_PATH".* ]]; then
 	export PATH="$PATH:$PIP_PACKAGES_PATH"
 fi
 
-export FZF_DEFAULT_OPTS="--height 70% --layout=reverse --border --preview 'bat --color=always {}' --preview-window '~3'"
+export FZF_DEFAULT_OPTS="--height 70% --border --reverse --preview-window '45%,~3'"
+export MY_FZF_FOLDER_OPTS="${FZF_DEFAULT_OPTS} --preview 'lsd -la --icon always --color always {}'"
+export MY_FZF_FILE_OPTS="${FZF_DEFAULT_OPTS} --preview 'bat --color=always {}'"
+export MY_LSD_OPTS="-la --icon always --color always"
+export LESS="-XR"
 
-alias less="less -XR"
+alias fzf="fzf ${MY_FZF_FILE_OPTS}"
 
-alias ll="lsd -la --icon always --color always"
-alias l="lsd -la --icon always --color always"
+alias ll="lsd ${MY_LSD_OPTS}"
+alias l="lsd ${MY_LSD_OPTS}"
 
 alias bashconf="nvim ~/.bashrc.user"
 alias bashreload="source ~/.bashrc.user"
 alias tmuxconf="nvim ~/.tmux.conf"
+
 alias vim="nvim"
-alias vimf="nvim \$(fzf)"
-alias nvimf="nvim \$(fzf)"
-alias less="less -XR"
+
+alias vimf="nvim \$(fzf ${MY_FZF_FILE_OPTS})"
+alias nvimf="nvim \$(fzf ${MY_FZF_FILE_OPTS})"
+alias cdi="cd \$(find . -type d -print | fzf ${MY_FZF_FOLDER_OPTS})"
+
+eval "$(fzf --bash)"
