@@ -1,5 +1,11 @@
 return {
   {
-    "Pocco81/auto-save.nvim"
+    "okuuva/auto-save.nvim",
+    opts = {
+      execution_message = {
+        enabled = false
+      }
+    }
   }
 }
+

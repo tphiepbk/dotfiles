@@ -9,12 +9,16 @@
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
--- Disable arrow keys
+-- Disable keys
 local disable_arrow_keys_modes = { "n", "i", "v", "x", "t", "c" }
+
 keymap.set(disable_arrow_keys_modes, "<Up>", "<Nop>", opts)
 keymap.set(disable_arrow_keys_modes, "<Down>", "<Nop>", opts)
 keymap.set(disable_arrow_keys_modes, "<Left>", "<Nop>", opts)
 keymap.set(disable_arrow_keys_modes, "<Right>", "<Nop>", opts)
+
+keymap.set(disable_arrow_keys_modes, "<A-j>", "<Nop>", opts)
+keymap.set(disable_arrow_keys_modes, "<A-k>", "<Nop>", opts)
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", opts)
