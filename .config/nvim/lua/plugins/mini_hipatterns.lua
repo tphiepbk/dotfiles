@@ -1,5 +1,5 @@
 return {
-  {
+    {
 		"echasnovski/mini.hipatterns",
 		event = "BufReadPre",
 		opts = {
@@ -17,7 +17,7 @@ return {
 						return MiniHipatterns.compute_hex_color_group(hex_color, "bg")
 					end
 				}
-      }
-			}
+            }
+		}
 	}
 }

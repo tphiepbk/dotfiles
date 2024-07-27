@@ -1,5 +1,5 @@
 return {
-  {
+    {
 		"telescope.nvim",
 		dependencies = {
 			{
