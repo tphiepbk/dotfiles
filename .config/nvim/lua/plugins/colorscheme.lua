@@ -7,6 +7,10 @@ return {
         priority = 1000,
         opts = {
             style = "night",
+            styles = {
+                sidebars = "transparent",
+                floats = "transparent",
+            },
             transparent = true,
             on_colors = function(colors)
                 colors.border = orange
