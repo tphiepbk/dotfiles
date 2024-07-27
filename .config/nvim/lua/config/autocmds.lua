@@ -5,18 +5,16 @@ autocmd({ "FileType" }, {
     pattern = { "*" },
     callback = function()
         vim.b.autoformat = false
-    end,
+    end
 })
 
 -- Open NeoTree automatically
-autocmd({ "UiEnter" }, {
-    pattern = { "*" },
+autocmd({ "VimEnter" }, {
     callback = function()
         vim.schedule(function()
             vim.cmd("Neotree")
-        end)
-        vim.schedule(function()
             vim.cmd("wincmd p")
         end)
     end,
 })
+

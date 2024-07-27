@@ -39,12 +39,15 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 │   │   ├── bufferline.lua</br>
 │   │   ├── lualine.lua</br>
 │   │   ├── git.lua</br>
+│   │   ├── _disabled_flash.lua</br>
 │   │   ├── mini_hipatterns.lua</br>
 │   │   ├── telescope.lua</br>
-│   │   ├── colorscheme.lua</br>
 │   │   ├── inc_rename.lua</br>
+│   │   ├── colorscheme.lua</br>
+│   │   ├── _disabled_which_key.lua</br>
 │   │   ├── notify.lua</br>
 │   │   ├── treesitter.lua</br>
+│   │   ├── neotree.lua</br>
 │   │   ├── dashboard.lua</br>
 │   │   ├── autosave.lua</br>
 │   │   ├── lsp_config.lua</br>
