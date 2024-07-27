@@ -13,6 +13,11 @@ return {
                     -- 'thumbs.db',
                 },
                 never_show = {},
+            },
+        },
+        window = {
+            mappings = {
+                ["s"] = "",
             }
         }
     }
