@@ -17,6 +17,7 @@ return {
             },
         },
         window = {
+            width = 30,
             mappings = {
                 ["s"] = "",
             }

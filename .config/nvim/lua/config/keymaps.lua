@@ -8,17 +8,17 @@
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
+local all_modes = { "n", "i", "v", "x", "t", "c" }
 
--- Disable keys
-local disable_arrow_keys_modes = { "n", "i", "v", "x", "t", "c" }
+-- Disable arrow keys
+keymap.set(all_modes, "<Up>", "<Nop>", opts)
+keymap.set(all_modes, "<Down>", "<Nop>", opts)
+keymap.set(all_modes, "<Left>", "<Nop>", opts)
+keymap.set(all_modes, "<Right>", "<Nop>", opts)
 
-keymap.set(disable_arrow_keys_modes, "<Up>", "<Nop>", opts)
-keymap.set(disable_arrow_keys_modes, "<Down>", "<Nop>", opts)
-keymap.set(disable_arrow_keys_modes, "<Left>", "<Nop>", opts)
-keymap.set(disable_arrow_keys_modes, "<Right>", "<Nop>", opts)
-
-keymap.set(disable_arrow_keys_modes, "<A-j>", "<Nop>", opts)
-keymap.set(disable_arrow_keys_modes, "<A-k>", "<Nop>", opts)
+-- Disable swapping lines
+keymap.set(all_modes, "<A-j>", "<Nop>", opts)
+keymap.set(all_modes, "<A-k>", "<Nop>", opts)
 
 -- Select all
 keymap.set("n", "<C-a>", "gg<S-v>G", opts)
@@ -51,3 +51,5 @@ keymap.set("n", "<Leader>qq", ":q<CR>", opts)
 keymap.set("n", "<Leader>qa", ":qa<CR>", opts)
 keymap.set("n", "<Leader>wq", ":wq<CR>", opts)
 
+-- Fix bug with "s" key
+keymap.set("n", "s", "<Nop>", opts)
