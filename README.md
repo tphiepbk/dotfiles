@@ -85,11 +85,11 @@ Leader key: `<Space>`
 
 Visit http://patorjk.com/software/taag to get cool string like this.
 
-![Neovim screenshot 1](images/neovim1.png)
+![Neovim screenshot 1](images/screenshot1.png)
 
-![Neovim screenshot 2](images/neovim2.png)
+![Neovim screenshot 2](images/screenshot2.png)
 
-![Neovim screenshot 3](images/neovim3.png)
+![Neovim screenshot 3](images/screenshot3.png)
 
 
 ## Inspired by: https://github.com/craftzdog/dotfiles-public
