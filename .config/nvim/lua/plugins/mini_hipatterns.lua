@@ -16,7 +16,11 @@ return {
 						local hex_color = utils.hslToHex(h, s, l)
 						return MiniHipatterns.compute_hex_color_group(hex_color, "bg")
 					end
-				}
+				},
+                fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+                hack  = { pattern = '%f[%w]()HACK()%f[%W]',  group = 'MiniHipatternsHack'  },
+                todo  = { pattern = '%f[%w]()TODO()%f[%W]',  group = 'MiniHipatternsTodo'  },
+                note  = { pattern = '%f[%w]()NOTE()%f[%W]',  group = 'MiniHipatternsNote'  },
             }
 		}
 	}
