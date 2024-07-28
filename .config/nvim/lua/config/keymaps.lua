@@ -36,11 +36,12 @@ keymap.set("n", "sk", "<C-w>k")
 keymap.set("n", "sl", "<C-w>l")
 keymap.set("n", "sj", "<C-w>j")
 
--- Resize window
-keymap.set("n", "<C-w><Left>", "<C-w>>")
-keymap.set("n", "<C-w><Right>", "<C-w><")
-keymap.set("n", "<C-w><Up>", "<C-w>-")
-keymap.set("n", "<C-w><Down>", "<C-w>+")
+-- Better resize window
+local resize = require("winresize").resize
+keymap.set("n", "<C-Left>", function() resize(0, 2, "left") end, opts)
+keymap.set("n", "<C-Right>", function() resize(0, 2, "right") end, opts)
+keymap.set("n", "<C-Up>", function() resize(0, 1, "up") end, opts)
+keymap.set("n", "<C-Down>", function() resize(0, 1, "down") end, opts)
 
 -- Stay in indent mode
 keymap.set("v", "<", "<gv", opts)
