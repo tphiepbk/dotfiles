@@ -38,9 +38,10 @@ vim.opt.pumblend = 5
 vim.opt.background = 'dark'
 vim.opt.cmdheight = 0
 
--- Undo levels
--- Set to 0 for Vi compatibility: One level of undo and "u" undoes itself
-vim.opt.undolevels = 0
+-- Undo config
+-- These values match with basic Vim
+vim.opt.undolevels = 1000
+vim.opt.undofile = false
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
