@@ -46,30 +46,30 @@ local get_filename = function()
             file_icon = ""
         end
         else
-        file_icon = ""
-        hl_group = "WinBar"
+            file_icon = ""
+            hl_group = "WinBar"
         end
 
         local buf_ft = vim.bo.filetype
 
         if buf_ft == "dapui_breakpoints" then
-        file_icon = ""
+            file_icon = ""
         end
 
         if buf_ft == "dapui_stacks" then
-        file_icon = ""
+            file_icon = ""
         end
 
         if buf_ft == "dapui_scopes" then
-        file_icon = ""
+            file_icon = ""
         end
 
         if buf_ft == "dapui_watches" then
-        file_icon = "󰂥"
+            file_icon = "󰂥"
         end
 
         if buf_ft == "dapui_console" then
-        file_icon = ""
+            file_icon = ""
         end
 
         return " " .. "%#" .. hl_group .. "#" .. file_icon .. " " .. "%*" .. " " .. "%#WinBar#" .. filename .. "%*"

@@ -1,3 +1,5 @@
+-- tokyonight is the default colorscheme
+
 local orange = "#ff8700"
 
 return {
