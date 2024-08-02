@@ -34,7 +34,7 @@ local winbar_filetype_exclude = {
 local get_filename = function()
     local filename = vim.fn.expand "%:t"
     local extension = vim.fn.expand "%:e"
-    local f = require "breadcrumbs.utils"
+    local f = require("breadcrumbs.utils")
 
     if not f.isempty(filename) then
         local file_icon, hl_group = nil, nil
