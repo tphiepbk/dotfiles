@@ -4,9 +4,16 @@ return {
     opts = {
         options = {
             icons_enabled = true,
-            theme = 'powerline_dark',
-            section_separators = { left = '', right = '' },
-            component_separators = { left = '', right = '' },
+            -- theme = 'powerline_dark',
+            theme = 'molokai',
+
+            -- section_separators = { left = '', right = '' },
+            section_separators = { right = '', left = '' },
+            -- section_separators = { left = '', right = '' },
+
+            component_separiators = { left = '', right = '' },
+            -- component_separators = "",
+
             disabled_filetypes = {},
             globalstatus = true
         },
