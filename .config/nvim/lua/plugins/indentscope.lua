@@ -1,5 +1,4 @@
-return
-{
+return {
     "echasnovski/mini.indentscope",
     version = false,
     event = "LazyFile",
