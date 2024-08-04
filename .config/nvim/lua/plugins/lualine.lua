@@ -4,14 +4,14 @@ return {
     opts = {
         options = {
             icons_enabled = true,
-            -- theme = 'powerline_dark',
-            theme = 'molokai',
+            theme = 'powerline_dark',
+            -- theme = 'molokai',
 
             -- section_separators = { left = '', right = '' },
             section_separators = { right = '', left = '' },
             -- section_separators = { left = '', right = '' },
 
-            component_separiators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
             -- component_separators = "",
 
             disabled_filetypes = {},
@@ -32,23 +32,41 @@ return {
                     'branch',
                     icon = {
                         '',
-                    }
+                    },
+                },
+                {
+                    'diff',
                 }
             },
             lualine_c = {
                 {
                     'filename',
-                    file_status = true, -- displays file status (readonly status, modified status)
-                    path = 2, -- 0 = just filename, 1 = relative path, 2 = absolute path
+                    file_status = true,
+                    path = 2,
                     icon = {
                         "",
-                        color = {
-                            fg = 'white'
-                        }
                     }
-                }
+                },
+                {
+                    'filesize',
+                    icon = {
+                        '',
+                    }
+                },
             },
             lualine_x = {
+                {
+                    'searchcount',
+                    icon = {
+                        ''
+                    }
+                },
+                {
+                    'selectioncount',
+                    icon = {
+                        ''
+                    }
+                },
                 {
                     'diagnostics',
                     sources = { "nvim_diagnostic" },

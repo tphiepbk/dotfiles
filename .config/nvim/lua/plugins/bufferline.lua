@@ -1,10 +1,17 @@
 -- Define themes
--- local tphiepbk = {
---     background_color = '#000050',
---     tab_text_color = '#ffffff',
---     current_selected_tab_text_color = '#ffff00',
---     current_selected_tab_background_color = '#074508',
--- }
+local tphiepbk = {
+    background_color = '#000050',
+    tab_text_color = '#ffffff',
+    current_selected_tab_text_color = '#ffff00',
+    current_selected_tab_background_color = '#074508',
+}
+
+local powerline_dark = {
+    background_color = '#202020',
+    tab_text_color = '#84d5b1',
+    current_selected_tab_text_color = '#2e311d',
+    current_selected_tab_background_color = '#dfff00',
+}
 
 local molokai = {
     background_color = '#1e2021',
@@ -13,7 +20,7 @@ local molokai = {
     current_selected_tab_background_color = '#f92173',
 }
 
-local theme = molokai
+local theme = powerline_dark
 
 return {
     'akinsho/bufferline.nvim',

@@ -7,10 +7,11 @@ return {
     lazy = false,
     priority = 1000,
     opts = {
-        style = "night",
+        style = "storm",
         styles = {
             sidebars = "transparent",
             floats = "transparent",
+            lualine_bold = true
         },
         transparent = true,
         on_colors = function(colors)
