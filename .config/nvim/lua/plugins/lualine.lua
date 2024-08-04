@@ -22,11 +22,8 @@ return {
                 {
                     'mode',
                     icon = {
-                        '',
+                        '',
                         align = 'left',
-                        -- color = {
-                        --     fg = 'white'
-                        -- }
                     }
                 }
             },
@@ -34,11 +31,7 @@ return {
                 {
                     'branch',
                     icon = {
-                        '',
-                        align = 'right',
-                        color = {
-                            fg = 'white'
-                        }
+                        '',
                     }
                 }
             },
@@ -48,7 +41,7 @@ return {
                     file_status = true, -- displays file status (readonly status, modified status)
                     path = 2, -- 0 = just filename, 1 = relative path, 2 = absolute path
                     icon = {
-                        "",
+                        "",
                         color = {
                             fg = 'white'
                         }
@@ -66,17 +59,35 @@ return {
                         hint = ' '
                     }
                 },
-                'encoding',
-                'filetype'
+                {
+                    'encoding',
+                    icon = {
+                        ''
+                    }
+                },
+                {
+                    'fileformat',
+                },
+                {
+                    'filetype',
+                }
             },
             lualine_y = {
                 {
-                    'progress'
+                    'progress',
+                    icon = {
+                        "",
+                        align = "right"
+                    }
                 }
             },
             lualine_z = {
                 {
-                    'location'
+                    'location',
+                    icon = {
+                        "",
+                        align = "right"
+                    }
                 }
             }
         },
