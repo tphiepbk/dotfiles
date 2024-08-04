@@ -36,7 +36,8 @@ return {
             show_buffer_close_icons = false,
             show_close_icon = false,
             separator_style = "slant",
-            diagnostics = "" -- Disable diagnostics
+            tab_size = 5,
+            diagnostics = "", -- Disable diagnostics
         },
         highlights = {
             -- Fill color of the bufferline
