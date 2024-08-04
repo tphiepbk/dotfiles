@@ -1,39 +1,622 @@
 #!/bin/bash
 
-COMMON_BINARY_PATH="/home/tphiepbk/.prebuilt/bin"
-if [[ ! "$PATH" =~ .*"$COMMON_BINARY_PATH".* ]]; then
-	export PATH="$PATH:$COMMON_BINARY_PATH"
-fi
+# ========================================================== DEFAULT EXPORT =====================================================================
 
-NODEJS_PATH="/home/tphiepbk/.prebuilt/nodejs/bin"
-if [[ ! "$PATH" =~ .*"$NODEJS_PATH".* ]]; then
-	export PATH="$PATH:$NODEJS_PATH"
-fi
-
-PIP_PACKAGES_PATH="/home/tphiepbk/.local/bin"
-if [[ ! "$PATH" =~ .*"$PIP_PACKAGES_PATH".* ]]; then
-	export PATH="$PATH:$PIP_PACKAGES_PATH"
-fi
-
-export FZF_DEFAULT_OPTS="--height 70% --border --reverse --preview-window '45%,~3'"
-export MY_FZF_FOLDER_OPTS="${FZF_DEFAULT_OPTS} --preview 'lsd -la --icon always --color always {}'"
-export MY_FZF_FILE_OPTS="${FZF_DEFAULT_OPTS} --preview 'bat --color=always {}'"
-export MY_LSD_OPTS="-la --icon always --color always"
+export TERM="xterm-256color"
 export LESS="-XR"
 
-alias fzf="fzf ${MY_FZF_FILE_OPTS}"
+# ========================================================== EXTERNAL TOOLS =====================================================================
 
-alias ll="lsd ${MY_LSD_OPTS}"
-alias l="lsd ${MY_LSD_OPTS}"
+if [[ ! "$PATH" == *"/home/tphiepbk/.prebuilt/bin"* ]]; then
+    export PATH="/home/tphiepbk/.prebuilt/bin:$PATH"
+fi
 
-alias bashconf="nvim ~/.bashrc.user"
-alias bashreload="source ~/.bashrc.user"
-alias tmuxconf="nvim ~/.tmux.conf"
+if [[ ! "$PATH" == *"/home/tphiepbk/.prebuilt/node-v20.11.1-linux-x64/bin"* ]]; then
+    export PATH="/home/tphiepbk/.prebuilt/node-v20.11.1-linux-x64/bin:$PATH"
+fi
 
+# ========================================================== DEFAULT OPTIONS =====================================================================
+
+_LSD_OPTS=("-lahF" "--color" "always" "--icon" "always" "--header")
+_BAT_OPTS=("--color=always")
+
+_FZF_DEFAULT_OPTS=("--reverse" "--border" "--height='70%'" "--preview-window '45%,~3'")
+export FZF_DEFAULT_OPTS="${_FZF_DEFAULT_OPTS[*]}"
+
+_FZF_FOLDER_OPTS=("--preview" "lsd ${_LSD_OPTS[*]} {}")
+_FZF_FILE_OPTS=("--multi" "--preview" "bat ${_BAT_OPTS[*]} {}")
+
+# ========================================================== PROMPT UTILITIES =====================================================================
+
+# Global Variables
+# For these variables, we can use $COLUMNS and $LINE instead,
+# but I want to use tput :D
+TERM_NUM_OF_COLUMNS=
+TERM_NUM_OF_LINES=
+
+DIRECTORY_HISTORY_FILE="/home/tphiepbk/.directory_history"
+MAX_LINE_DIRECTORY_HISTORY=100
+
+# Utility to store the current visited directory
+# If directory is already exists, we will not save it
+store_current_directory () {
+    if [[ ! -e "${DIRECTORY_HISTORY_FILE}" ]]; then
+        touch "${DIRECTORY_HISTORY_FILE}"
+    fi
+    local current_dir
+    current_dir="$(pwd)"
+    if ! grep -q "${current_dir}" "${DIRECTORY_HISTORY_FILE}"; then
+        echo "${current_dir}" >> "${DIRECTORY_HISTORY_FILE}"
+    fi
+}
+
+# Utility to removed the deleted directory which is still in the
+# .directory_history file
+remove_non_existent_directory() {
+    while IFS= read -r dir; do
+        if [[ ! -d $dir ]]; then
+            # Use "|" instead because "/" will appear in the the "dir" variable
+            # Could not use "/<text to delete>/d" also
+            sed -i "s|$dir||" "${DIRECTORY_HISTORY_FILE}"
+        fi
+    done <<< "$(cat ${DIRECTORY_HISTORY_FILE})"
+    # Remove blank line
+    sed -i '/^$/d' "${DIRECTORY_HISTORY_FILE}"
+}
+
+# Utility to clear the .directory_history file if it's too long
+clear_directory_history() {
+    local number_of_line
+    number_of_line=$(wc -l "${DIRECTORY_HISTORY_FILE}" | cut -d" " -f1)
+    if [[ "${number_of_line}" -gt "${MAX_LINE_DIRECTORY_HISTORY}" ]]; then
+        echo "" > "${DIRECTORY_HISTORY_FILE}"
+    fi
+}
+
+# PROMPT CUSTOMIZATION
+PROMPT_COMMAND=prompt_command
+
+prompt_command () {
+    local EXIT="$?"
+    TERM_NUM_OF_COLUMNS=$(tput cols)
+    TERM_NUM_OF_LINES=$(tput lines)
+
+    remove_non_existent_directory
+
+    clear_directory_history
+
+    store_current_directory
+
+
+    if [[ "$TERM_NUM_OF_COLUMNS" -lt 100 ]]; then
+        generate_prompt_lite $EXIT
+    else
+        generate_prompt $EXIT
+    fi
+}
+
+parse_git_branch() {
+    local git_branch
+    git_branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+    if [[ -n "${git_branch}" ]]; then
+        if [[ ! "${git_branch}" =~ ^\(.*\)$ ]]; then
+            git_branch="(${git_branch})"
+        fi
+        echo "${git_branch}"
+    fi
+}
+
+generate_prompt_lite() {
+    local EXIT="$1"
+
+    # Colors used in prompt
+    local END_COLOR=
+    END_COLOR=$(tput sgr0)
+
+    local PURPLE=
+    PURPLE=$(tput setaf 141)
+
+    local VIOLET=
+    VIOLET=$(tput setaf 177)
+
+    local ORANGE=
+    ORANGE=$(tput setaf 202)
+
+    local DARKSLATEGRAY1=
+    DARKSLATEGRAY1=$(tput setaf 81)
+
+    local MAGENTA=
+    MAGENTA=$(tput setaf 200)
+
+    local RED=
+    RED=$(tput setaf 196)
+
+    local GREEN=
+    GREEN=$(tput setaf 46)
+
+    local GOLD=
+    GOLD=$(tput setaf 222)
+
+    # Special colors
+    local PS_RED=
+    PS_RED="\[${RED}\]"
+
+    local PS_GREEN=
+    PS_GREEN="\[${GREEN}\]"
+
+    local PS_GOLD=
+    PS_GOLD="\[${GOLD}\]"
+
+    local PS_VIOLET=
+    PS_VIOLET="\[${VIOLET}\]"
+
+    local PS_ORANGE=
+    PS_ORANGE="\[${ORANGE}\]"
+
+    local PS_DARKSLATEGRAY1=
+    PS_DARKSLATEGRAY1="\[${DARKSLATEGRAY1}\]"
+
+    local PS_MAGENTA=
+    PS_MAGENTA="\[${MAGENTA}\]"
+
+    local PS_END_COLOR=
+    PS_END_COLOR="\[${END_COLOR}\]"
+
+    # Define icons
+    # Unicode character broken after sourcing openstack_vmware.sh
+    # because that file have this command :export LC_ALL="C"
+    # We should unset LC_ALL after sourcing that file
+    local folder_icon=
+    folder_icon=$'\uf07c'
+    folder_icon="${PS_ORANGE}${folder_icon}${PS_END_COLOR}"
+
+    local git_icon=
+    git_icon=$'\uf1d3'
+
+    local check_circle_icon=
+    check_circle_icon=$'\uf058'
+
+    local cross_circle_icon=
+    cross_circle_icon=$'\uf057'
+
+    local open_dir_icon=
+    open_dir_icon=$'\u27ea'
+    open_dir_icon="${PS_RED}${open_dir_icon}${PS_END_COLOR}"
+
+    local close_dir_icon=
+    close_dir_icon=$'\u27eb'
+    close_dir_icon="${PS_RED}${close_dir_icon}${PS_END_COLOR}"
+
+    # DEFINE PATTERNS
+
+    # Username hostname part
+    local current_username=
+    current_username=$(whoami)
+    local current_hostname=
+    current_hostname=$(hostname)
+    local username_hostname_part="${PS_VIOLET}${current_username}@${current_hostname}${PS_END_COLOR}"
+
+    # Directory part
+    local current_directory=
+    current_directory=$(pwd)
+    local current_directory_reduced=
+    current_directory_reduced=$(pwd | rev | cut -d'/' -f1 | rev)
+    local directory_part=
+    directory_part="${folder_icon}  ${open_dir_icon}${PS_DARKSLATEGRAY1}${current_directory_reduced}${PS_END_COLOR}${close_dir_icon}"
+
+    # Git branch part
+    local current_git_branch=
+    current_git_branch=$(parse_git_branch)
+    local current_git_branch_length=${#current_git_branch}
+    local git_branch_part=
+    if [[ $current_git_branch_length -ne 0 ]]; then
+        git_branch_part="${git_icon}  ${PS_ORANGE}${current_git_branch}${PS_END_COLOR} "
+    else
+        git_branch_part=""
+    fi
+
+    local zero_return_code_part="${PS_GREEN}(${EXIT})${PS_END_COLOR}"
+    local non_zero_return_code_part="${PS_RED}(${EXIT})${PS_END_COLOR}"
+
+    # Indicate if user it root (#) or otherwise ($)
+    local user_type_indicator="${PS_MAGENTA}\$${PS_END_COLOR}"
+
+    # Input indicator part
+    local input_indicator_icon=
+    input_indicator_icon=$'\u25b6\u25b6\u25b6\u25b6'
+    local input_indicator="${PS_GOLD}${input_indicator_icon}${PS_END_COLOR}"
+
+    # START MAKING PROMPT
+    local generated_ps1="${username_hostname_part} ${directory_part} ${git_branch_part}"
+
+    # Left part
+
+    if [[ "$EXIT" -eq 0 ]]; then
+        generated_ps1+="${zero_return_code_part}"
+    else
+        generated_ps1+="${non_zero_return_code_part}"
+    fi
+
+    generated_ps1+=" ${user_type_indicator} "
+
+    generated_ps1+="${input_indicator} "
+
+    echo ""
+    PS1=" ${generated_ps1}"
+}
+
+generate_prompt() {
+    local EXIT="$1"
+
+    # Colors used in prompt
+    local END_COLOR=
+    END_COLOR=$(tput sgr0)
+
+    local PURPLE=
+    PURPLE=$(tput setaf 141)
+
+    local VIOLET=
+    VIOLET=$(tput setaf 177)
+
+    local ORANGE=
+    ORANGE=$(tput setaf 202)
+
+    local MAGENTA=
+    MAGENTA=$(tput setaf 200)
+
+    local YELLOW=
+    YELLOW=$(tput setaf 11)
+
+    local DARKSLATEGRAY1=
+    DARKSLATEGRAY1=$(tput setaf 123)
+
+    local RED=
+    RED=$(tput setaf 196)
+
+    local GREEN=
+    GREEN=$(tput setaf 46)
+
+    local GOLD=
+    GOLD=$(tput setaf 222)
+
+    # Special colors
+    local PS_RED=
+    PS_RED="\[${RED}\]"
+
+    local PS_GREEN=
+    PS_GREEN="\[${GREEN}\]"
+
+    local PS_GOLD=
+    PS_GOLD="\[${GOLD}\]"
+
+    local PS_END_COLOR=
+    PS_END_COLOR="\[${END_COLOR}\]"
+
+    # Define icons
+    # Unicode character broken after sourcing openstack_vmware.sh
+    # because that file have this command :export LC_ALL="C"
+    # We should unset LC_ALL after sourcing that file
+    local sparkling_heart_icon
+    sparkling_heart_icon=$'\U1F496'
+
+    # local heart_icon
+    # heart_icon=$'\u2764'
+    # heart_icon="${RED}${heart_icon}${END_COLOR}"
+
+    local calendar_icon=
+    calendar_icon=$'\U1f4c6'
+
+    local clock_icon=
+    clock_icon=$'\U1f552'
+
+    local folder_icon=
+    folder_icon=$'\uf07c'
+    folder_icon="${ORANGE}${folder_icon}${END_COLOR}"
+
+    local git_icon=
+    git_icon=$'\uf1d3'
+
+    local check_circle_icon=
+    check_circle_icon=$'\u2705'
+
+    local cross_circle_icon=
+    cross_circle_icon=$'\u26d4'
+
+    local linux_penguin_icon
+    linux_penguin_icon=$'\uf17c'
+
+    local dash_icon
+    dash_icon=$'\u23af'
+
+    local internal_dot_icon
+    internal_dot_icon=$'\u25ce'
+
+    local open_dir_icon=
+    open_dir_icon=$'\u27ea'
+    open_dir_icon="${RED}${open_dir_icon}${END_COLOR}"
+
+    local close_dir_icon=
+    close_dir_icon=$'\u27eb'
+    close_dir_icon="${RED}${close_dir_icon}${END_COLOR}"
+
+    local first_line_start_icon
+    first_line_start_icon=$'\u256d'
+
+    local datetime_open_icon
+    datetime_open_icon=$'\u25c1'
+
+    local datetime_close_icon
+    datetime_close_icon=$'\u25b7'
+
+    local space_length=1
+    local icon_length=2
+    local small_icon_length=1
+    local punctuation_length=1
+
+    # Define patterns
+    local first_line_left_symbol="${YELLOW}${first_line_start_icon}${dash_icon}${internal_dot_icon}${END_COLOR}${ORANGE} ${linux_penguin_icon}${END_COLOR} "
+    local second_line_symbol=""
+    local symbol_length=6
+
+    # Datetime icon
+    local datetime_symbol_length=5
+    local first_line_datetime_left_symbol="${MAGENTA}"
+    local first_line_datetime_right_symbol="${MAGENTA}"
+    for ((i = 0 ; i < datetime_symbol_length ; i++)); do
+      first_line_datetime_left_symbol+="${datetime_open_icon}"
+      first_line_datetime_right_symbol+="${datetime_close_icon}"
+    done
+    first_line_datetime_left_symbol+="${END_COLOR}"
+    first_line_datetime_right_symbol+="${END_COLOR}"
+
+    # Datetime part
+    local current_datetime=
+    current_datetime=$(date +"${calendar_icon} %b %d ${clock_icon} %H:%M:%S")
+    local datetime_part="${PURPLE}${current_datetime}${END_COLOR}"
+    local datetime_part_length=${#current_datetime}
+    # Plus 2 because length of icon is 2, but the length operator count only 1 for each icon
+    # We have 2 icons so we should plus 2
+    datetime_part_length=$((datetime_part_length+2))
+
+    # Username hostname part
+    local current_username=
+    current_username=$(whoami)
+    local current_username_length=${#current_username}
+    local current_hostname=
+    current_hostname=$(hostname)
+    local current_hostname_length=${#current_hostname}
+    local username_hostname_part="${VIOLET}${current_username}${sparkling_heart_icon}${END_COLOR}${VIOLET}${current_hostname}${END_COLOR}"
+    local username_hostname_part_length=$((current_username_length + icon_length + current_hostname_length))
+
+    # Git branch part
+    local current_git_branch=
+    current_git_branch=$(parse_git_branch)
+    local current_git_branch_length=${#current_git_branch}
+    local git_branch_part=
+    local git_branch_part_length=
+    if [[ $current_git_branch_length -ne 0 ]]; then
+        git_branch_part="${git_icon}  ${ORANGE}${current_git_branch}${END_COLOR} "
+        git_branch_part_length=$((small_icon_length + space_length * 2 + current_git_branch_length + space_length))
+    else
+        git_branch_part=""
+        git_branch_part_length=0
+    fi
+
+    # Directory part
+    local current_full_directory=
+    current_full_directory=$(pwd)
+    local current_full_directory_length=${#current_full_directory}
+    local current_directory=
+    if ((current_full_directory_length + current_git_branch_length >= TERM_NUM_OF_COLUMNS * 60 / 100)); then
+      current_directory=$(pwd | rev | cut -d'/' -f1 | rev)
+    else
+      current_directory=${current_full_directory}
+    fi
+
+    local directory_part=
+    directory_part="${folder_icon}  ${open_dir_icon}${DARKSLATEGRAY1}${current_directory}${END_COLOR}${close_dir_icon}"
+
+    local current_directory_length=${#current_directory}
+    local directory_part_length=$((small_icon_length + space_length * 2 + punctuation_length + current_directory_length + punctuation_length))
+
+    # Return code part
+    local zero_return_code_part="${PS_GREEN}return ${EXIT} ${check_circle_icon}${PS_END_COLOR}"
+    local non_zero_return_code_part="${PS_RED}return ${EXIT} ${cross_circle_icon}${PS_END_COLOR}"
+
+    # Input indicator part
+    local input_indicator_icon=
+    input_indicator_icon=$'\u25b6\u25b6\u25b6\u25b6'
+    local input_indicator="${PS_GOLD}${input_indicator_icon}${PS_END_COLOR}"
+
+    # START MAKING PROMPT
+    local PS1_first_line="\n"
+    local PS1_second_line=""
+
+    # Left part
+    PS1_first_line_left_part="${first_line_left_symbol} "
+    PS1_first_line_left_part+="${username_hostname_part} ${directory_part} ${git_branch_part}"
+    PS1_first_line_left_part+="${MAGENTA}\$${END_COLOR} "
+    local PS1_first_line_left_part_length=$((symbol_length + space_length + username_hostname_part_length + space_length + directory_part_length\
+        + space_length + git_branch_part_length + punctuation_length + space_length))
+
+    # Right part
+    PS1_first_line_right_part=" ${first_line_datetime_left_symbol} ${datetime_part} ${first_line_datetime_right_symbol}"
+    local PS1_first_line_right_part_length=$((datetime_part_length + datetime_symbol_length * 2 + space_length * 3))
+
+    # Calculate number of available space
+    local number_of_available_space=$((TERM_NUM_OF_COLUMNS-PS1_first_line_left_part_length-PS1_first_line_right_part_length))
+
+    # Middle part
+    local PS1_first_line_middle_part="${YELLOW}${internal_dot_icon}"
+    ((number_of_available_space-=2))
+    for ((i = 0 ; i < number_of_available_space ; i++)); do
+        PS1_first_line_middle_part+="${dash_icon}"
+    done
+    PS1_first_line_middle_part+="${internal_dot_icon}${END_COLOR}"
+
+    # Combination
+    PS1_first_line+="${PS1_first_line_left_part}"
+    PS1_first_line+="${PS1_first_line_middle_part}"
+    PS1_first_line+="${PS1_first_line_right_part}"
+
+    PS1_second_line="${second_line_symbol} "
+
+    if [[ "$EXIT" -eq 0 ]]; then
+        PS1_second_line+="${zero_return_code_part}"
+    else
+        PS1_second_line+="${non_zero_return_code_part}"
+    fi
+
+    PS1_second_line+=" ${input_indicator} "
+
+    echo -e "${PS1_first_line}"
+
+    PS1="${PS1_second_line}"
+}
+
+# ========================================================== LISTING UTILITIES =====================================================================
+
+# My custom list directory command
+# Only use "less" when there are more than 30 directory appears
+my_ll_command() {
+    NUMBER_OF_LINE=$(find "$@" -maxdepth 1 | wc -l)
+    echo "$NUMBER_OF_LINE"
+    if ((NUMBER_OF_LINE > TERM_NUM_OF_LINES)); then
+        lsd "${_LSD_OPTS[@]}" "$@" | less
+    else
+        lsd "${_LSD_OPTS[@]}" "$@"
+    fi
+    return $?
+}
+
+my_tree_command() {
+    local CURRENT_DIRECTORY=
+    if [[ -z "$1" ]]; then
+        CURRENT_DIRECTORY="."
+    else
+        CURRENT_DIRECTORY="$1"
+    fi
+
+    if [[ -e "${CURRENT_DIRECTORY}" ]]; then
+        NUMBER_OF_LINE=$(tre --all "${CURRENT_DIRECTORY}" | wc -l)
+        if [[ "${NUMBER_OF_LINE}" -gt "$TERM_NUM_OF_LINES" ]]; then
+            tre --all --color always "${CURRENT_DIRECTORY}" | less
+        else
+            tre --all --color always "${CURRENT_DIRECTORY}"
+        fi
+        return $?
+    else
+        echo "tre: cannot access '$1': No such file or directory"
+        return 2
+    fi
+}
+
+# ========================================================== FZF UTILITIES =====================================================================
+
+show_history_using_fzf () {
+    local HISTORY_FZF_RESULTS=
+    # HISTORY_FZF_RESULTS="$(history | fzf --tac --tiebreak=index | cut -d " " -f 4-)"
+    HISTORY_FZF_RESULTS="$(history | fzf-tmux -p '90%,70%' --tac --tiebreak=index | cut -d " " -f 4-)"
+    parse_to_prompt "$HISTORY_FZF_RESULTS"
+}
+
+parse_to_prompt() {
+    local INPUT="${*}"
+    READLINE_LINE=${READLINE_LINE:+${READLINE_LINE:0:READLINE_POINT}}${INPUT}${READLINE_LINE:+${READLINE_LINE:READLINE_POINT}}
+    READLINE_POINT=$(( READLINE_POINT + ${#INPUT} ))
+}
+
+# Mapping Ctrl-R with fzf
+bind -x '"\C-r": show_history_using_fzf';
+
+nvim_fzf_utility () {
+    local fzf_output
+    fzf_output=$(fzf-tmux -p "90%,70%" "${_FZF_FILE_OPTS[@]}")
+    if [[ -n ${fzf_output} ]]; then
+        nvim "${fzf_output}"
+    fi
+}
+
+cd_fzf_utility () {
+    local fzf_output
+    local git_branch
+    git_branch=$(parse_git_branch)
+    if [[ -n ${git_branch} ]]; then
+        local git_root_dir
+        git_root_dir=$(git root)
+        fzf_output=$( (cat "${DIRECTORY_HISTORY_FILE}" && find . "${git_root_dir}" -type d -print) | fzf-tmux -p "90%,70%" "${_FZF_FOLDER_OPTS[@]}")
+    else
+        fzf_output=$( (cat "${DIRECTORY_HISTORY_FILE}" && find . -type d -print) | fzf-tmux -p "90%,70%" "${_FZF_FOLDER_OPTS[@]}")
+    fi
+    echo "$fzf_output"
+    if [[ -n ${fzf_output} ]]; then
+       cd "${fzf_output}" || return 1
+    fi
+}
+
+# Utility to call tmux whenever start
+start_tmux () {
+    local TMUX_INIT_SESSION="tphiepbk"
+
+    local TMUX_DEFAULT_FILE="/tmp/tmux-2645/default"
+
+    # If we are currently not in tmux, start tmux
+    # if not, do nothing
+    if [[ -z "$TMUX" ]]; then
+        # Check if tmux file exists
+        if [[ ! -e "$TMUX_DEFAULT_FILE" ]]; then
+            echo "Trying restoring tmux..."
+            pkill -USR1 tmux
+        fi
+
+        # Check if tmux works fine
+        # or if there is not any tmux session
+        if ! tmux ls; then
+            echo "Something went wrong after restoring, creating new session..."
+            if ! tmux new -s "$TMUX_INIT_SESSION"; then
+                echo "$TMUX_INIT_SESSION already exists, entering..."
+                tmux a -t "$TMUX_INIT_SESSION"
+            fi
+        else
+            echo "Entering first session of the list"
+            local first_session=
+            first_session=$(tmux ls | head -n 1 | cut -d ":" -f1)
+            tmux a -t "$first_session"
+        fi
+    fi
+}
+
+# Common
+alias bashconf="nvim /home/tphiepbk/.bashrc.user"
+alias inputconf="nvim /home/tphiepbk/.inputrc"
+alias tmuxconf="nvim /home/tphiepbk/.tmux.conf"
+alias gitconf="nvim /home/tphiepbk/.gitconfig"
+
+alias bashreload="source /home/tphiepbk/.bashrc.user"
+alias tmuxview="bat /home/tphiepbk/.tmux.conf"
+alias gitview="bat /home/tphiepbk/.gitconfig"
+
+alias working="cd /home/tphiepbk/workspace"
+
+alias ll="my_ll_command"
+alias l="my_ll_command"
+alias lt="my_tree_command"
+alias cls="clear"
 alias vim="nvim"
+alias nvimf="nvim_fzf_utility"
+alias vimf="nvim_fzf_utility"
+alias cdi="cd_fzf_utility"
 
-alias vimf="nvim \$(fzf ${MY_FZF_FILE_OPTS})"
-alias nvimf="nvim \$(fzf ${MY_FZF_FILE_OPTS})"
-alias cdi="cd \$(find . -type d -print | fzf ${MY_FZF_FOLDER_OPTS})"
 
-eval "$(fzf --bash)"
+alias starttmux="start_tmux"
+
+alias brfconf="my_brf_command"
+
+alias gitroot='cd "$(git root)"'
+
+source "$HOME/.cargo/env"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
