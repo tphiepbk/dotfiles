@@ -31,66 +31,71 @@ Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 ***Directory*** structure
 
 /home/tphiepbk/.config/nvim</br>
-├── lazy-lock.json</br>
+├── lazyvim.json</br>
+├── README.md</br>
+├── .neoconf.json</br>
 ├── lua</br>
 │   ├── plugins</br>
-│   │   ├── noice.lua</br>
-│   │   ├── mason.lua</br>
-│   │   ├── bufferline.lua</br>
-│   │   ├── lualine.lua</br>
-│   │   ├── git.lua</br>
-│   │   ├── _disabled_flash.lua</br>
-│   │   ├── mini_hipatterns.lua</br>
 │   │   ├── telescope.lua</br>
-│   │   ├── inc_rename.lua</br>
-│   │   ├── colorscheme.lua</br>
-│   │   ├── _disabled_which_key.lua</br>
-│   │   ├── notify.lua</br>
-│   │   ├── treesitter.lua</br>
-│   │   ├── neotree.lua</br>
 │   │   ├── dashboard.lua</br>
-│   │   ├── autosave.lua</br>
+│   │   ├── bufferline.lua</br>
+│   │   ├── indentscope.lua</br>
+│   │   ├── noice.lua</br>
+│   │   ├── breadcrumb.lua</br>
+│   │   ├── highlight_patterns.lua</br>
+│   │   ├── neotree.lua</br>
+│   │   ├── tokyonight.lua</br>
+│   │   ├── treesitter.lua</br>
+│   │   ├── _disabled_plugins.lua</br>
+│   │   ├── lualine.lua</br>
 │   │   ├── lsp_config.lua</br>
-│   │   └── incline.lua</br>
+│   │   ├── incline.lua</br>
+│   │   ├── winresize.lua</br>
+│   │   ├── autosave.lua</br>
+│   │   ├── git.lua</br>
+│   │   ├── notify.lua</br>
+│   │   └── mason.lua</br>
 │   └── config</br>
 │       ├── options.lua</br>
-│       ├── autocmds.lua</br>
 │       ├── keymaps.lua</br>
+│       ├── autocmds.lua</br>
 │       └── lazy.lua</br>
-├── README.md</br>
-├── stylua.toml</br>
 ├── init.lua</br>
-├── lazyvim.json</br>
-└── LICENSE</br>
+├── lazy-lock.json</br>
+├── LICENSE</br>
+├── stylua.toml</br>
+└── .luarc.json</br>
 
 ## Keymaps
 
 Leader key: `<Space>`
 
-| Leader | Key 1      | Key 2  | Action                     |
-|:------:|:----------:|:------:|:--------------------------:|
-| Yes    | `<Space>`  |        | Telescope find files       |
-| Yes    | `/`        |        | Telescope live grep        |
-| No     | `Alt`      | `jk`   | Move line(s)               |
-| No     | `Tab`      |        | Next tab                   |
-| No     | `Shift`    | `Tab`  | Previous tab               |
-| No     | `s`        | `s`    | Split windows horizontally |
-| No     | `s`        | `v`    | Split windows vertically   |
-| Yes    | `q`        | `q`    | Quit                       |
-| Yes    | `q`        | `a`    | Quit all                   |
-| Yes    | `w`        | `q`    | Save and quit              |
-| Yes    | `r`        | `n`    | Incremental Rename         |
+| Key 1     | Key 2   | Key 3 | Action                    |
+|:---------:|:-------:|:----:|:--------------------------:|
+| `<Space>`   | `<Space>` |      | Telescope find files       |
+| `<Space>`   | `f`       |  `f`   | Telescope find files       |
+| `<Space>`   | `f`       |  `g`   | Telescope live grep        |
+| `<Space>`   | `f`       |  `b`   | Telescope find buffers     |
+| `Tab`       |         |      | Next tab                   |
+| `Shift`     | `Tab`     |      | Previous tab               |
+| `s`         | `s`       |      | Split windows horizontally |
+| `s`         | `v`       |      | Split windows vertically   |
+| `<Space>`   | `e`       |      | Toggle NeoTree             |
+| `<Space>`   | `q`       | `q`    | Quit                       |
+| `<Space>`   | `q`       | `a`    | Quit all                   |
+| `<Space>`   | `w`       | `q`    | Save and quit              |
 
 ## Screenshots
 
 Visit http://patorjk.com/software/taag to get cool string like this.
 
-![Neovim screenshot 1](images/screenshot1.png)
+![image_1](images/image1.png)
 
-![Neovim screenshot 2](images/screenshot2.png)
+![image_2](images/image2.png)
 
-![Neovim screenshot 3](images/screenshot3.png)
+![image_3](images/image3.png)
 
+![image_4](images/image4.png)
 
 ## Inspired by: https://github.com/craftzdog/dotfiles-public
 ## Many thanks to all developers, appreciate it :D
