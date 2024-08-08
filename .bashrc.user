@@ -2,7 +2,7 @@
 
 # ========================================================== DEFAULT EXPORT =====================================================================
 
-export TERM="xterm-256color"
+export TERM="tmux-256color"
 export LESS="-XR"
 
 # ========================================================== EXTERNAL TOOLS =====================================================================
@@ -88,7 +88,7 @@ prompt_command () {
     store_current_directory
 
 
-    if [[ "$TERM_NUM_OF_COLUMNS" -lt 100 ]]; then
+    if [[ "$TERM_NUM_OF_COLUMNS" -lt 130 ]]; then
         generate_prompt_lite $EXIT
     else
         generate_prompt $EXIT
@@ -459,7 +459,7 @@ generate_prompt() {
     PS1_first_line+="${PS1_first_line_middle_part}"
     PS1_first_line+="${PS1_first_line_right_part}"
 
-    PS1_second_line="${second_line_symbol} "
+    PS1_second_line="${second_line_symbol}"
 
     if [[ "$EXIT" -eq 0 ]]; then
         PS1_second_line+="${zero_return_code_part}"
