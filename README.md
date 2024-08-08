@@ -7,13 +7,11 @@
 
 ## Needed npm packages
 
-/home/tphiepbk/.prebuilt/nodejs/lib</br>
-├── corepack@0.23.0</br>
-├── express@4.18.3</br>
-├── list@2.0.19</br>
-├── neovim@5.0.1</br>
-├── npm@10.5.0</br>
-└── tree-sitter-cli@0.22.</br>
+/home/tphiepbk/.nvm/versions/node/v20.16.0/lib</br>
+├── corepack@0.28.2</br>
+├── neovim@5.1.0</br>
+├── npm@10.8.1</br>
+└── tree-sitter-cli@0.22.6</br>
 
 ## External opensource utilities
 
@@ -24,7 +22,7 @@
 + ***fd***: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
 + ***glow***: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
 
-## Neovim (version 0.9.5)
+## Neovim (version 0.10.1)
 
 Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 
