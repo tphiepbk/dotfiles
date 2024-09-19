@@ -1,17 +1,28 @@
 # TPHIEPBK'S CONFIGURATION
 
-## Needed apt packages
-+ python3.10-venv
-+ rustc
-+ ruby-full
+## Prerequisites
 
-## Needed npm packages
+***apt packages***
++ sudo apt-get install python3.10-venv
++ sudo apt-get install ruby-full
++ sudo apt-get install python3-pip
 
-/home/tphiepbk/.nvm/versions/node/v20.16.0/lib</br>
-├── corepack@0.28.2</br>
-├── neovim@5.1.0</br>
-├── npm@10.8.1</br>
-└── tree-sitter-cli@0.22.6</br>
+***pip packages***
++ pip install neovim
+
+***nodejs***
+https://nodejs.org/en/download/package-manager
+Use "nvm" to install
+
+***npm packages***
++ npm install -g neovim@latest
++ npm install -g tree-sitter-cli@latest
+
+***rust***
+https://www.rust-lang.org/tools/install
+
+***gem packages***
++ gem install neovim
 
 ## External opensource utilities
 
@@ -23,6 +34,10 @@
 + ***glow***: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
 
 ## Neovim (version 0.10.1)
+
+https://github.com/neovim/neovim
+
+Use the "nvim-linux64.tar.gz" under "Releases" section
 
 Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 
