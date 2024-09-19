@@ -11,15 +11,15 @@
 + pip install neovim
 
 ***nodejs***
-https://nodejs.org/en/download/package-manager
-Use "nvm" to install
++ https://nodejs.org/en/download/package-manager
++ Use "nvm" to install
 
 ***npm packages***
 + npm install -g neovim@latest
 + npm install -g tree-sitter-cli@latest
 
 ***rust***
-https://www.rust-lang.org/tools/install
++ https://www.rust-lang.org/tools/install
 
 ***gem packages***
 + gem install neovim
