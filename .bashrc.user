@@ -24,6 +24,11 @@ if [[ ! "$PATH" == *"$HOME/.prebuilt/bin"* ]]; then
     export PATH="$HOME/.prebuilt/bin:$PATH"
 fi
 
+if [[ ! "$PATH" == *"/usr/local/go/bin"* ]]; then
+    export PATH="/usr/local/go/bin:$PATH"
+fi
+
+
 # ========================================================== DEFAULT OPTIONS =====================================================================
 
 _LSD_OPTS=("-lahF" "--color" "always" "--icon" "always" "--header")
@@ -182,12 +187,6 @@ function _generate_prompt_lite() {
     local git_icon=
     git_icon=$'\uf1d3'
 
-    local check_circle_icon=
-    check_circle_icon=$'\uf058'
-
-    local cross_circle_icon=
-    cross_circle_icon=$'\uf057'
-
     local open_dir_icon=
     open_dir_icon=$'\u27ea'
     open_dir_icon="${PS_RED}${open_dir_icon}${PS_END_COLOR}"
@@ -232,7 +231,7 @@ function _generate_prompt_lite() {
 
     # Input indicator part
     local input_indicator_icon=
-    input_indicator_icon=$'\u25b6\u25b6\u25b6\u25b6'
+    input_indicator_icon=$'\uf0da\uf0da\uf0da\uf0da\uf0da'
     local input_indicator="${PS_GOLD}${input_indicator_icon}${PS_END_COLOR}"
 
     # START MAKING PROMPT
@@ -308,10 +307,6 @@ function _generate_prompt() {
     local sparkling_heart_icon
     sparkling_heart_icon=$'\U1F496'
 
-    # local heart_icon
-    # heart_icon=$'\u2764'
-    # heart_icon="${RED}${heart_icon}${END_COLOR}"
-
     local calendar_icon=
     calendar_icon=$'\U1f4c6'
 
@@ -325,11 +320,11 @@ function _generate_prompt() {
     local git_icon=
     git_icon=$'\uf1d3'
 
-    local check_circle_icon=
-    check_circle_icon=$'\u2705'
+    local check_icon
+    check_icon=$'\uf00c'
 
-    local cross_circle_icon=
-    cross_circle_icon=$'\u26d4'
+    local cross_icon=
+    cross_icon=$'\uf00d'
 
     local linux_penguin_icon
     linux_penguin_icon=$'\uf17c'
@@ -429,12 +424,12 @@ function _generate_prompt() {
     local directory_part_length=$((small_icon_length + space_length * 2 + punctuation_length + current_directory_length + punctuation_length))
 
     # Return code part
-    local zero_return_code_part="${PS_GREEN}return ${EXIT} ${check_circle_icon}${PS_END_COLOR}"
-    local non_zero_return_code_part="${PS_RED}return ${EXIT} ${cross_circle_icon}${PS_END_COLOR}"
+    local zero_return_code_part="${PS_GREEN}(return ${EXIT}) ${check_icon}${PS_END_COLOR}"
+    local non_zero_return_code_part="${PS_RED}(return ${EXIT}) ${cross_icon}${PS_END_COLOR}"
 
     # Input indicator part
     local input_indicator_icon=
-    input_indicator_icon=$'\u25b6\u25b6\u25b6\u25b6'
+    input_indicator_icon=$'\uf0da\uf0da\uf0da\uf0da\uf0da'
     local input_indicator="${PS_GOLD}${input_indicator_icon}${PS_END_COLOR}"
 
     # START MAKING PROMPT
