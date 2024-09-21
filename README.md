@@ -3,9 +3,7 @@
 ## Prerequisites
 
 ***apt packages***
-+ sudo apt-get install python3.10-venv
-+ sudo apt-get install ruby-full
-+ sudo apt-get install python3-pip
++ sudo apt-get install python3.10-venv python3-pip ruby-full bc
 
 ***pip packages***
 + pip install neovim
@@ -15,8 +13,7 @@
 + Use "nvm" to install
 
 ***npm packages***
-+ npm install -g neovim@latest
-+ npm install -g tree-sitter-cli@latest
++ npm install -g neovim@latest tree-sitter-cli@latest
 
 ***rust***
 + https://www.rust-lang.org/tools/install
