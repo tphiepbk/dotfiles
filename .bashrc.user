@@ -195,6 +195,9 @@ function _generate_prompt_lite() {
     close_dir_icon=$'\u27eb'
     close_dir_icon="${PS_RED}${close_dir_icon}${PS_END_COLOR}"
 
+    local sparkling_heart_icon
+    sparkling_heart_icon=$'\U1F496'
+
     # DEFINE PATTERNS
 
     # Username hostname part
@@ -202,7 +205,7 @@ function _generate_prompt_lite() {
     current_username=$(whoami)
     local current_hostname=
     current_hostname=$(hostname)
-    local username_hostname_part="${PS_VIOLET}${current_username}@${current_hostname}${PS_END_COLOR}"
+    local username_hostname_part="${PS_VIOLET}${current_username}${sparkling_heart_icon}${current_hostname}${PS_END_COLOR}"
 
     # Directory part
     local current_directory=
@@ -230,9 +233,9 @@ function _generate_prompt_lite() {
     local user_type_indicator="${PS_MAGENTA}\$${PS_END_COLOR}"
 
     # Input indicator part
-    local input_indicator_icon=
-    input_indicator_icon=$'\uf0da\uf0da\uf0da\uf0da\uf0da'
-    local input_indicator="${PS_GOLD}${input_indicator_icon}${PS_END_COLOR}"
+    local keyboard_icon=
+    keyboard_icon=$'\uf11c'
+    local input_indicator="${PS_GOLD}${keyboard_icon}${PS_END_COLOR}"
 
     # START MAKING PROMPT
     local generated_ps1="${username_hostname_part} ${directory_part} ${git_branch_part}"
@@ -247,7 +250,7 @@ function _generate_prompt_lite() {
 
     generated_ps1+=" ${user_type_indicator} "
 
-    generated_ps1+="${input_indicator} "
+    generated_ps1+="${input_indicator}  "
 
     echo ""
     PS1=" ${generated_ps1}"
@@ -428,9 +431,12 @@ function _generate_prompt() {
     local non_zero_return_code_part="${PS_RED}(return ${EXIT}) ${cross_icon}${PS_END_COLOR}"
 
     # Input indicator part
-    local input_indicator_icon=
-    input_indicator_icon=$'\uf0da\uf0da\uf0da\uf0da\uf0da'
-    local input_indicator="${PS_GOLD}${input_indicator_icon}${PS_END_COLOR}"
+    local keyboard_icon=
+    keyboard_icon=$'\uf11c'
+    local play_icon=
+    play_icon=$'\uf04b'
+    local input_indicator=
+    input_indicator="${PS_GOLD}${play_icon}${play_icon} ${keyboard_icon}${PS_END_COLOR}"
 
     # START MAKING PROMPT
     local PS1_first_line="\n"
@@ -471,7 +477,7 @@ function _generate_prompt() {
         PS1_second_line+="${non_zero_return_code_part}"
     fi
 
-    PS1_second_line+=" ${input_indicator} "
+    PS1_second_line+=" ${input_indicator}  "
 
     echo -e "${PS1_first_line}"
 
