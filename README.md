@@ -1,25 +1,53 @@
 # TPHIEPBK'S CONFIGURATION
 
+## OS
+
++ Windows Subsystem for Linux (WSL)
++ Distro: Ubuntu 22.04.3 LTS
++ RAM: 2GB
++ WSL configuration file on Windows: `C:\Users\thanh\.wslconfig`
+```
+[wsl2]
+memory=2GB
+```
+
++ WSL configuration file on the distro (Ubuntu): `/etc/wsl.conf`
+```
+[boot]
+systemd=true
+
+[interop]
+appendWindowsPath=false
+```
+
 ## Prerequisites
 
 ***apt packages***
-+ sudo apt-get install python3.10-venv python3-pip ruby-full bc
+
+`sudo apt-get install python3.10-venv python3-pip ruby-full bc`
 
 ***pip packages***
-+ pip install neovim
+
+`pip install neovim`
 
 ***nodejs***
 + https://nodejs.org/en/download/package-manager
 + Use "nvm" to install
 
 ***npm packages***
-+ npm install -g neovim@latest tree-sitter-cli@latest
+
+`npm install -g neovim@latest tree-sitter-cli@latest`
 
 ***rust***
 + https://www.rust-lang.org/tools/install
 
 ***gem packages***
-+ gem install neovim
+
+`gem install neovim`
+
+***docker***
++ https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
++ Add current user to *docker* group: `sudo usermod -a -G docker tphiepbk`
 
 ## External opensource utilities
 
