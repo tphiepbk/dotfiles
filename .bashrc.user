@@ -9,26 +9,6 @@
 export TERM="xterm-256color"
 export LESS="-XR"
 
-# cargo
-# shellcheck source="/dev/null"
-source "$HOME/.cargo/env"
-
-# nodejs
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# ========================================================== EXTERNAL TOOLS =====================================================================
-
-if [[ ! "$PATH" == *"$HOME/.prebuilt/bin"* ]]; then
-    export PATH="$HOME/.prebuilt/bin:$PATH"
-fi
-
-if [[ ! "$PATH" == *"/usr/local/go/bin"* ]]; then
-    export PATH="/usr/local/go/bin:$PATH"
-fi
-
-
 # ========================================================== DEFAULT OPTIONS =====================================================================
 
 _LSD_OPTS=("-lahF" "--color" "always" "--icon" "always" "--header")
@@ -195,8 +175,10 @@ function _generate_prompt_lite() {
     close_dir_icon=$'\u27eb'
     close_dir_icon="${PS_RED}${close_dir_icon}${PS_END_COLOR}"
 
-    local sparkling_heart_icon
-    sparkling_heart_icon=$'\U1F496'
+    local laptop_icon=$'\uf109'
+    local laptop_icon
+    laptop_icon=$'\uf109'
+    laptop_icon="${RED}${laptop_icon}${END_COLOR}"
 
     # DEFINE PATTERNS
 
@@ -205,7 +187,7 @@ function _generate_prompt_lite() {
     current_username=$(whoami)
     local current_hostname=
     current_hostname=$(hostname)
-    local username_hostname_part="${PS_VIOLET}${current_username}${sparkling_heart_icon}${current_hostname}${PS_END_COLOR}"
+    local username_hostname_part="${PS_VIOLET}${current_username}${PS_END_COLOR}${laptop_icon} ${PS_VIOLET}${current_hostname}${PS_END_COLOR}"
 
     # Directory part
     local current_directory=
@@ -307,14 +289,17 @@ function _generate_prompt() {
     # Unicode character broken after sourcing openstack_vmware.sh
     # because that file have this command :export LC_ALL="C"
     # We should unset LC_ALL after sourcing that file
-    local sparkling_heart_icon
-    sparkling_heart_icon=$'\U1F496'
+    local laptop_icon
+    laptop_icon=$'\uf109'
+    laptop_icon="${RED}${laptop_icon}${END_COLOR}"
 
     local calendar_icon=
-    calendar_icon=$'\U1f4c6'
+    calendar_icon=$'\uf073'
+    calendar_icon="${GREEN}${calendar_icon}${END_COLOR}"
 
     local clock_icon=
-    clock_icon=$'\U1f552'
+    clock_icon=$'\uf017'
+    clock_icon="${GREEN}${clock_icon}${END_COLOR}"
 
     local folder_icon=
     folder_icon=$'\uf07c'
@@ -377,13 +362,11 @@ function _generate_prompt() {
     first_line_datetime_right_symbol+="${END_COLOR}"
 
     # Datetime part
-    local current_datetime=
-    current_datetime=$(date +"${calendar_icon} %b %d ${clock_icon} %H:%M:%S")
-    local datetime_part="${PURPLE}${current_datetime}${END_COLOR}"
-    local datetime_part_length=${#current_datetime}
-    # Plus 2 because length of icon is 2, but the length operator count only 1 for each icon
-    # We have 2 icons so we should plus 2
-    datetime_part_length=$((datetime_part_length+2))
+    local datetime_part=
+    datetime_part=$(date +"${calendar_icon} ${PURPLE}%b %d${END_COLOR} ${clock_icon} ${PURPLE}%H:%M:%S${END_COLOR}")
+    local datetime_part_length=${#datetime_part}
+    # Modify the datetime_part_length a little bit to fit the terminal size
+    datetime_part_length=$((datetime_part_length-66))
 
     # Username hostname part
     local current_username=
@@ -392,7 +375,7 @@ function _generate_prompt() {
     local current_hostname=
     current_hostname=$(hostname)
     local current_hostname_length=${#current_hostname}
-    local username_hostname_part="${VIOLET}${current_username}${sparkling_heart_icon}${END_COLOR}${VIOLET}${current_hostname}${END_COLOR}"
+    local username_hostname_part="${VIOLET}${current_username}${END_COLOR}${laptop_icon} ${VIOLET}${current_hostname}${END_COLOR}"
     local username_hostname_part_length=$((current_username_length + icon_length + current_hostname_length))
 
     # Git branch part
@@ -469,7 +452,7 @@ function _generate_prompt() {
     PS1_first_line+="${PS1_first_line_middle_part}"
     PS1_first_line+="${PS1_first_line_right_part}"
 
-    PS1_second_line="${second_line_symbol} "
+    PS1_second_line="${second_line_symbol}"
 
     if [[ "$EXIT" -eq 0 ]]; then
         PS1_second_line+="${zero_return_code_part}"
