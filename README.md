@@ -3,12 +3,15 @@
 ## OS
 
 + Windows Subsystem for Linux (WSL)
-+ Distro: Ubuntu 22.04.3 LTS
++ Distro: openSUSE-Tumbleweed
 + RAM: 2GB
 + WSL configuration file on Windows: `C:\Users\thanh\.wslconfig`
 ```
 [wsl2]
-memory=2GB
+processors=4
+memory=6442450944
+swap=1073741824
+defaultVhdSize=53687091200
 ```
 
 + WSL configuration file on the distro (Ubuntu): `/etc/wsl.conf`
@@ -22,9 +25,9 @@ appendWindowsPath=false
 
 ## Prerequisites
 
-***apt packages***
+***zypper packages***
 
-`sudo apt-get install python3.10-venv python3-pip ruby-full bc`
+`sudo zypper install python3.10-venv python3-pip ruby-full bc`
 
 ***pip packages***
 

@@ -1,3 +1,5 @@
+vim.g.loaded_perl_provider = 0
+
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
 vim.opt.fileencoding = "utf-8"
@@ -65,4 +67,7 @@ vim.api.nvim_set_hl(namespace, "CursorLineNr", {fg="#5fff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "Search", {fg="#00ff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "NonText", {fg="#767676", bg="None"})
 vim.api.nvim_set_hl(namespace, "SignColumn", {fg="#080808", bg="None"})
+
+-- Disable all animations
+vim.g.snacks_animate = false
 

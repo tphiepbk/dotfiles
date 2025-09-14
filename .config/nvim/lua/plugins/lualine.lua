@@ -8,8 +8,8 @@ return {
             -- theme = 'molokai',
 
             -- section_separators = { left = '', right = '' },
-            section_separators = { right = '', left = '' },
-            -- section_separators = { left = '', right = '' },
+            -- section_separators = { right = '', left = '' },
+            section_separators = { left = '', right = '' },
 
             component_separators = { left = '', right = '' },
             -- component_separators = "",

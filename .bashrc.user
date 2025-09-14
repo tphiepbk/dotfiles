@@ -1,5 +1,11 @@
 #!/bin/bash
 
+########################################################################
+# AUTHOR: Hiep Phuc Thai                                               #
+# It takes me 2 years to finish this shiet, but it's worth every penny #
+# It's not just about the implementation, it's about the idea also     #
+########################################################################
+
 # RULES
 # - Use the keyword "function" before function
 # - Use the underline "_" before function name to hide it from bash completion
@@ -7,17 +13,48 @@
 # ========================================================== DEFAULT EXPORT =====================================================================
 
 export TERM="xterm-256color"
-export LESS="-XR"
+export LESS="-XRi"
+export EDITOR="/usr/bin/vim"
+
+# tmux tmp dir
+export TMUX_TMPDIR="$HOME/.tmux"
+
+# cdialab
+if [[ ! "$PATH" == *"$HOME/.cdialab"* ]]; then
+    export PATH="$HOME/.cdialab:$PATH"
+fi
+
+# my common scripts
+if [[ ! "$PATH" == *"$HOME/.scripts"* ]]; then
+    export PATH="$HOME/.scripts:$PATH"
+fi
+
+# nodejs
+export NVM_DIR="$HOME/.nvm"
+# shellcheck source=/dev/null
+[ -s "$NVM_DIR/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
+# shellcheck source=/dev/null
+[ -s "$NVM_DIR/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
+
+# ========================================================== EXTERNAL TOOLS =====================================================================
+
+if [[ ! "$PATH" == *"$HOME/.prebuilt/bin"* ]]; then
+    export PATH="$HOME/.prebuilt/bin:$PATH"
+fi
 
 # ========================================================== DEFAULT OPTIONS =====================================================================
 
-_LSD_OPTS=("-lahF" "--color" "always" "--icon" "always" "--header")
+_EZA_OPTS=("--long" "--classify=always" "--color=always" "--icons=always" \
+            "--all" "--all" \
+            "--binary" "--group" "--header" "--mounts" "--modified" "--time-style=+%a %d-%m-%Y %H:%M:%S" "--octal-permissions")
+
 _BAT_OPTS=("--color=always")
 
 _FZF_DEFAULT_OPTS=("--reverse" "--border" "--height='70%'" "--preview-window '45%,~3'")
 export FZF_DEFAULT_OPTS="${_FZF_DEFAULT_OPTS[*]}"
 
-_FZF_FOLDER_OPTS=("--preview" "lsd ${_LSD_OPTS[*]} {}")
+_FZF_FOLDER_OPTS=("--preview" "eza ${_EZA_OPTS[*]} {}")
+
 _FZF_FILE_OPTS=("--multi" "--preview" "bat ${_BAT_OPTS[*]} {}")
 
 # ========================================================== PROMPT UTILITIES =====================================================================
@@ -56,7 +93,7 @@ function _remove_non_existent_directory() {
             # Could not use "/<text to delete>/d" also
             sed -i "s|$dir||" "${DIRECTORY_HISTORY_FILE}"
         fi
-    done <<< "$(cat ${DIRECTORY_HISTORY_FILE})"
+    done <<< "$(cat "${DIRECTORY_HISTORY_FILE}")"
     # Remove blank line
     sed -i '/^$/d' "${DIRECTORY_HISTORY_FILE}"
 }
@@ -80,7 +117,6 @@ function _prompt_command () {
     _clear_directory_history
 
     _store_current_directory
-
 
     if [[ "$TERM_NUM_OF_COLUMNS" -lt 130 ]]; then
         _generate_prompt_lite $EXIT
@@ -167,18 +203,16 @@ function _generate_prompt_lite() {
     local git_icon=
     git_icon=$'\uf1d3'
 
-    local open_dir_icon=
-    open_dir_icon=$'\u27ea'
-    open_dir_icon="${PS_RED}${open_dir_icon}${PS_END_COLOR}"
+    local jet_fighter_icon
+    jet_fighter_icon=$'\uf0fb'
 
-    local close_dir_icon=
-    close_dir_icon=$'\u27eb'
-    close_dir_icon="${PS_RED}${close_dir_icon}${PS_END_COLOR}"
+    local opendir_icon
+    opendir_icon=$'\u27ea'
+    opendir_icon="${PS_RED}${opendir_icon}${PS_END_COLOR}"
 
-    local laptop_icon=$'\uf109'
-    local laptop_icon
-    laptop_icon=$'\uf109'
-    laptop_icon="${RED}${laptop_icon}${END_COLOR}"
+    local closedir_icon
+    closedir_icon=$'\u27eb'
+    closedir_icon="${PS_RED}${closedir_icon}${PS_END_COLOR}"
 
     # DEFINE PATTERNS
 
@@ -187,7 +221,7 @@ function _generate_prompt_lite() {
     current_username=$(whoami)
     local current_hostname=
     current_hostname=$(hostname)
-    local username_hostname_part="${PS_VIOLET}${current_username}${PS_END_COLOR}${laptop_icon} ${PS_VIOLET}${current_hostname}${PS_END_COLOR}"
+    local username_hostname_part="${PS_VIOLET}${current_username}${PS_END_COLOR}${PS_RED}${jet_fighter_icon}${PS_END_COLOR} ${PS_VIOLET}${current_hostname}${PS_END_COLOR}"
 
     # Directory part
     local current_directory=
@@ -195,7 +229,7 @@ function _generate_prompt_lite() {
     local current_directory_reduced=
     current_directory_reduced=$(pwd | rev | cut -d'/' -f1 | rev)
     local directory_part=
-    directory_part="${folder_icon}  ${open_dir_icon}${PS_DARKSLATEGRAY1}${current_directory_reduced}${PS_END_COLOR}${close_dir_icon}"
+    directory_part="${folder_icon}  ${opendir_icon}${PS_DARKSLATEGRAY1}${current_directory_reduced}${PS_END_COLOR}${closedir_icon}"
 
     # Git branch part
     local current_git_branch=
@@ -289,12 +323,11 @@ function _generate_prompt() {
     # Unicode character broken after sourcing openstack_vmware.sh
     # because that file have this command :export LC_ALL="C"
     # We should unset LC_ALL after sourcing that file
-    local laptop_icon
-    laptop_icon=$'\uf109'
-    laptop_icon="${RED}${laptop_icon}${END_COLOR}"
+    local jet_fighter_icon
+    jet_fighter_icon=$'\uf0fb'
 
     local calendar_icon=
-    calendar_icon=$'\uf073'
+    calendar_icon=$'\uf133'
     calendar_icon="${GREEN}${calendar_icon}${END_COLOR}"
 
     local clock_icon=
@@ -309,10 +342,10 @@ function _generate_prompt() {
     git_icon=$'\uf1d3'
 
     local check_icon
-    check_icon=$'\uf00c'
+    check_icon=$'\uf058'
 
     local cross_icon=
-    cross_icon=$'\uf00d'
+    cross_icon=$'\uf057'
 
     local linux_penguin_icon
     linux_penguin_icon=$'\uf17c'
@@ -320,25 +353,25 @@ function _generate_prompt() {
     local dash_icon
     dash_icon=$'\u23af'
 
-    local internal_dot_icon
+   local internal_dot_icon
     internal_dot_icon=$'\u25ce'
-
-    local open_dir_icon=
-    open_dir_icon=$'\u27ea'
-    open_dir_icon="${RED}${open_dir_icon}${END_COLOR}"
-
-    local close_dir_icon=
-    close_dir_icon=$'\u27eb'
-    close_dir_icon="${RED}${close_dir_icon}${END_COLOR}"
 
     local first_line_start_icon
     first_line_start_icon=$'\u256d'
 
     local datetime_open_icon
-    datetime_open_icon=$'\u25c1'
+    datetime_open_icon=$'\uf0d9'
 
     local datetime_close_icon
-    datetime_close_icon=$'\u25b7'
+    datetime_close_icon=$'\uf0da'
+
+    local opendir_icon
+    opendir_icon=$'\u27ea'
+    opendir_icon="${RED}${opendir_icon}${END_COLOR}"
+
+    local closedir_icon
+    closedir_icon=$'\u27eb'
+    closedir_icon="${RED}${closedir_icon}${END_COLOR}"
 
     local space_length=1
     local icon_length=2
@@ -362,9 +395,10 @@ function _generate_prompt() {
     first_line_datetime_right_symbol+="${END_COLOR}"
 
     # Datetime part
-    local datetime_part=
-    datetime_part=$(date +"${calendar_icon} ${PURPLE}%b %d${END_COLOR} ${clock_icon} ${PURPLE}%H:%M:%S${END_COLOR}")
-    local datetime_part_length=${#datetime_part}
+    local current_datetime=
+    current_datetime=$(date +"${calendar_icon} ${PURPLE} %d/%m/%Y${END_COLOR} ${clock_icon} ${PURPLE} %H:%M:%S${END_COLOR}")
+    local datetime_part="${PURPLE}${current_datetime}${END_COLOR}"
+    local datetime_part_length=${#current_datetime}
     # Modify the datetime_part_length a little bit to fit the terminal size
     datetime_part_length=$((datetime_part_length-66))
 
@@ -375,7 +409,7 @@ function _generate_prompt() {
     local current_hostname=
     current_hostname=$(hostname)
     local current_hostname_length=${#current_hostname}
-    local username_hostname_part="${VIOLET}${current_username}${END_COLOR}${laptop_icon} ${VIOLET}${current_hostname}${END_COLOR}"
+    local username_hostname_part="${VIOLET}${current_username}${END_COLOR}${RED}${jet_fighter_icon}${END_COLOR} ${VIOLET}${current_hostname}${END_COLOR}"
     local username_hostname_part_length=$((current_username_length + icon_length + current_hostname_length))
 
     # Git branch part
@@ -404,14 +438,14 @@ function _generate_prompt() {
     fi
 
     local directory_part=
-    directory_part="${folder_icon}  ${open_dir_icon}${DARKSLATEGRAY1}${current_directory}${END_COLOR}${close_dir_icon}"
+    directory_part="${folder_icon}  ${opendir_icon}${DARKSLATEGRAY1}${current_directory}${END_COLOR}${closedir_icon}"
 
     local current_directory_length=${#current_directory}
-    local directory_part_length=$((small_icon_length + space_length * 2 + punctuation_length + current_directory_length + punctuation_length))
+    local directory_part_length=$((small_icon_length + punctuation_length * 2 + space_length * 2 + current_directory_length))
 
     # Return code part
-    local zero_return_code_part="${PS_GREEN}(return ${EXIT}) ${check_icon}${PS_END_COLOR}"
-    local non_zero_return_code_part="${PS_RED}(return ${EXIT}) ${cross_icon}${PS_END_COLOR}"
+    local zero_return_code_part="${PS_GREEN}return ${EXIT} ${check_icon}${PS_END_COLOR}"
+    local non_zero_return_code_part="${PS_RED}return ${EXIT} ${cross_icon}${PS_END_COLOR}"
 
     # Input indicator part
     local keyboard_icon=
@@ -419,7 +453,7 @@ function _generate_prompt() {
     local play_icon=
     play_icon=$'\uf04b'
     local input_indicator=
-    input_indicator="${PS_GOLD}${play_icon}${play_icon} ${keyboard_icon}${PS_END_COLOR}"
+    input_indicator="${PS_GOLD}${play_icon}${play_icon}${play_icon} ${keyboard_icon}${PS_END_COLOR}"
 
     # START MAKING PROMPT
     local PS1_first_line="\n"
@@ -452,7 +486,7 @@ function _generate_prompt() {
     PS1_first_line+="${PS1_first_line_middle_part}"
     PS1_first_line+="${PS1_first_line_right_part}"
 
-    PS1_second_line="${second_line_symbol}"
+    PS1_second_line="${second_line_symbol} "
 
     if [[ "$EXIT" -eq 0 ]]; then
         PS1_second_line+="${zero_return_code_part}"
@@ -460,7 +494,7 @@ function _generate_prompt() {
         PS1_second_line+="${non_zero_return_code_part}"
     fi
 
-    PS1_second_line+=" ${input_indicator}  "
+    PS1_second_line+="  ${input_indicator}  "
 
     echo -e "${PS1_first_line}"
 
@@ -473,11 +507,16 @@ function _generate_prompt() {
 # Only use "less" when there are more than 30 directory appears
 function _my_ll_command() {
     NUMBER_OF_LINE=$(find "$@" -maxdepth 1 | wc -l)
-    echo "$NUMBER_OF_LINE"
+
+    if [[ $NUMBER_OF_LINE -gt 0 ]]; then
+        echo "Number of files/folders: $NUMBER_OF_LINE"
+        echo
+    fi
+
     if ((NUMBER_OF_LINE > TERM_NUM_OF_LINES)); then
-        lsd "${_LSD_OPTS[@]}" "$@" | less
+        eza "${_EZA_OPTS[@]}" "$@" | less
     else
-        lsd "${_LSD_OPTS[@]}" "$@"
+        eza "${_EZA_OPTS[@]}" "$@"
     fi
     return $?
 }
@@ -514,7 +553,6 @@ function _parse_to_prompt() {
 
 function _show_history_using_fzf () {
     local HISTORY_FZF_RESULTS=
-    # HISTORY_FZF_RESULTS="$(history | fzf --tac --tiebreak=index | cut -d " " -f 4-)"
     HISTORY_FZF_RESULTS="$(history | fzf-tmux -p '90%,70%' --tac --tiebreak=index | cut -d " " -f 4-)"
     _parse_to_prompt "$HISTORY_FZF_RESULTS"
 }
@@ -522,12 +560,16 @@ function _show_history_using_fzf () {
 # Mapping Ctrl-R with fzf
 bind -x '"\C-r": _show_history_using_fzf';
 
-function _nvim_fzf_utility () {
+function _call_tool_with_fzf_utility () {
+    local tool="$1"
     local fzf_output
     fzf_output=$(fzf-tmux -p "90%,70%" "${_FZF_FILE_OPTS[@]}")
-    if [[ -n ${fzf_output} ]]; then
-        nvim "${fzf_output}"
+    local ret_code="$?"
+    if [[ -n ${fzf_output} && "${ret_code}" -eq 0 ]]; then
+        "$tool" "${fzf_output}"
+        ret_code="$?"
     fi
+    return "${ret_code}"
 }
 
 function _cd_fzf_utility () {
@@ -537,11 +579,10 @@ function _cd_fzf_utility () {
     if [[ -n ${git_branch} ]]; then
         local git_root_dir
         git_root_dir=$(git root)
-        fzf_output=$( (cat "${DIRECTORY_HISTORY_FILE}" && find . "${git_root_dir}" -type d -print) | fzf-tmux -p "90%,70%" "${_FZF_FOLDER_OPTS[@]}")
+        fzf_output=$( (cat "${DIRECTORY_HISTORY_FILE}" && find . "${git_root_dir}" -type d -print) | fzf-tmux -p "90%,70%" "${_FZF_FOLDER_OPTS[@]}" )
     else
-        fzf_output=$( (cat "${DIRECTORY_HISTORY_FILE}" && find . -type d -print) | fzf-tmux -p "90%,70%" "${_FZF_FOLDER_OPTS[@]}")
+        fzf_output=$( (cat "${DIRECTORY_HISTORY_FILE}" && find . -type d -print) | fzf-tmux -p "90%,70%" "${_FZF_FOLDER_OPTS[@]}" )
     fi
-    echo "$fzf_output"
     if [[ -n ${fzf_output} ]]; then
        cd "${fzf_output}" || return 1
     fi
@@ -549,7 +590,7 @@ function _cd_fzf_utility () {
 
 # Utility to call tmux whenever start
 function _start_tmux_utility () {
-    local TMUX_INIT_SESSION="tphiepbk"
+    local TMUX_INIT_SESSION="${USER}"
 
     local TMUX_DEFAULT_FILE="/tmp/tmux-2645/default"
 
@@ -576,6 +617,9 @@ function _start_tmux_utility () {
             first_session=$(tmux ls | head -n 1 | cut -d ":" -f1)
             tmux a -t "$first_session"
         fi
+    else
+        # Already in TMUX
+        echo "Already in tmux, skipping..."
     fi
 }
 
@@ -583,24 +627,35 @@ function _start_tmux_utility () {
 # ========================================================== ALIASES =====================================================================
 
 # confiruration
-alias bashconf="nvim $HOME/.bashrc.user"
-alias inputconf="nvim $HOME/.inputrc"
-alias tmuxconf="nvim $HOME/.tmux.conf"
-alias gitconf="nvim $HOME/.gitconfig"
-alias bashreload="source $HOME/.bashrc.user"
-alias tmuxview="bat $HOME/.tmux.conf"
-alias gitview="bat $HOME/.gitconfig"
+alias bashconf="nvim \$HOME/.bashrc.user"
+alias inputconf="nvim \$HOME/.inputrc"
+alias tmuxconf="nvim \$HOME/.tmux.conf"
+alias gitconf="nvim \$HOME/.gitconfig"
+alias bashreload="source \$HOME/.bashrc.user"
+alias tmuxview="bat \$HOME/.tmux.conf"
+alias gitview="bat \$HOME/.gitconfig"
+alias netrconf="nvim \$HOME/.netrc"
 
 # working
 alias ll="_my_ll_command"
 alias l="_my_ll_command"
 alias lt="_my_tree_command"
 alias cls="clear"
-alias nvimf="_nvim_fzf_utility"
+alias nvimf="_call_tool_with_fzf_utility nvim"
+alias vimf="_call_tool_with_fzf_utility vim"
+alias batf="_call_tool_with_fzf_utility bat"
+alias lessf="_call_tool_with_fzf_utility less"
+alias catf="_call_tool_with_fzf_utility cat"
 alias cdi="_cd_fzf_utility"
-alias working="cd $HOME/workspace"
+alias working="cd \$HOME/workspace"
 alias gitroot='cd "$(git root)"'
+alias dt='dt --side-by-side --diff-args=-U999'
 
 # start tmux
-alias starttmux="_start_tmux_utility"
+alias tux="_start_tmux_utility"
+
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv
+# shellcheck source=/dev/null
+source /usr/bin/virtualenvwrapper
 
