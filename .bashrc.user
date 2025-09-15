@@ -19,29 +19,6 @@ export EDITOR="/usr/bin/vim"
 # tmux tmp dir
 export TMUX_TMPDIR="$HOME/.tmux"
 
-# cdialab
-if [[ ! "$PATH" == *"$HOME/.cdialab"* ]]; then
-    export PATH="$HOME/.cdialab:$PATH"
-fi
-
-# my common scripts
-if [[ ! "$PATH" == *"$HOME/.scripts"* ]]; then
-    export PATH="$HOME/.scripts:$PATH"
-fi
-
-# nodejs
-export NVM_DIR="$HOME/.nvm"
-# shellcheck source=/dev/null
-[ -s "$NVM_DIR/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh"  # This loads nvm
-# shellcheck source=/dev/null
-[ -s "$NVM_DIR/bash_completion" ] && \. "${NVM_DIR}/bash_completion"  # This loads nvm bash_completion
-
-# ========================================================== EXTERNAL TOOLS =====================================================================
-
-if [[ ! "$PATH" == *"$HOME/.prebuilt/bin"* ]]; then
-    export PATH="$HOME/.prebuilt/bin:$PATH"
-fi
-
 # ========================================================== DEFAULT OPTIONS =====================================================================
 
 _EZA_OPTS=("--long" "--classify=always" "--color=always" "--icons=always" \
@@ -164,6 +141,9 @@ function _generate_prompt_lite() {
     local GREEN=
     GREEN=$(tput setaf 46)
 
+    local BLUE=
+    BLUE=$(tput setaf 39)
+
     local GOLD=
     GOLD=$(tput setaf 222)
 
@@ -173,6 +153,9 @@ function _generate_prompt_lite() {
 
     local PS_GREEN=
     PS_GREEN="\[${GREEN}\]"
+
+    local PS_BLUE=
+    PS_BLUE="\[${BLUE}\]"
 
     local PS_GOLD=
     PS_GOLD="\[${GOLD}\]"
@@ -242,6 +225,15 @@ function _generate_prompt_lite() {
         git_branch_part=""
     fi
 
+    # Python venv part
+    local python_venv_part
+    if [[ "${VIRTUAL_ENV_PROMPT}" ]]; then
+        python_venv_part="${BLUE}(${VIRTUAL_ENV_PROMPT})${END_COLOR} "
+    else
+        python_venv_part=""
+    fi
+
+
     local zero_return_code_part="${PS_GREEN}(${EXIT})${PS_END_COLOR}"
     local non_zero_return_code_part="${PS_RED}(${EXIT})${PS_END_COLOR}"
 
@@ -254,10 +246,9 @@ function _generate_prompt_lite() {
     local input_indicator="${PS_GOLD}${keyboard_icon}${PS_END_COLOR}"
 
     # START MAKING PROMPT
-    local generated_ps1="${username_hostname_part} ${directory_part} ${git_branch_part}"
+    local generated_ps1="${username_hostname_part} ${directory_part} ${git_branch_part}${python_venv_part}"
 
     # Left part
-
     if [[ "$EXIT" -eq 0 ]]; then
         generated_ps1+="${zero_return_code_part}"
     else
@@ -302,6 +293,9 @@ function _generate_prompt() {
 
     local GREEN=
     GREEN=$(tput setaf 46)
+
+    local BLUE=
+    BLUE=$(tput setaf 39)
 
     local GOLD=
     GOLD=$(tput setaf 222)
@@ -353,7 +347,7 @@ function _generate_prompt() {
     local dash_icon
     dash_icon=$'\u23af'
 
-   local internal_dot_icon
+    local internal_dot_icon
     internal_dot_icon=$'\u25ce'
 
     local first_line_start_icon
@@ -455,6 +449,17 @@ function _generate_prompt() {
     local input_indicator=
     input_indicator="${PS_GOLD}${play_icon}${play_icon}${play_icon} ${keyboard_icon}${PS_END_COLOR}"
 
+    # Python venv part
+    local python_venv_part
+    local python_venv_part_length
+    if [[ "${VIRTUAL_ENV_PROMPT}" ]]; then
+        python_venv_part="${BLUE}(${VIRTUAL_ENV_PROMPT})${END_COLOR} "
+        python_venv_part_length=$(( ${#VIRTUAL_ENV_PROMPT} + 3 ))
+    else
+        python_venv_part=""
+        python_venv_part_length=0
+    fi
+
     # START MAKING PROMPT
     local PS1_first_line="\n"
     local PS1_second_line=""
@@ -467,8 +472,8 @@ function _generate_prompt() {
         + space_length + git_branch_part_length + punctuation_length + space_length))
 
     # Right part
-    PS1_first_line_right_part=" ${first_line_datetime_left_symbol} ${datetime_part} ${first_line_datetime_right_symbol}"
-    local PS1_first_line_right_part_length=$((datetime_part_length + datetime_symbol_length * 2 + space_length * 3))
+    PS1_first_line_right_part=" ${python_venv_part}${first_line_datetime_left_symbol} ${datetime_part} ${first_line_datetime_right_symbol}"
+    local PS1_first_line_right_part_length=$((datetime_part_length + python_venv_part_length + datetime_symbol_length * 2 + space_length * 3))
 
     # Calculate number of available space
     local number_of_available_space=$((TERM_NUM_OF_COLUMNS-PS1_first_line_left_part_length-PS1_first_line_right_part_length))
@@ -623,18 +628,20 @@ function _start_tmux_utility () {
     fi
 }
 
-
 # ========================================================== ALIASES =====================================================================
 
 # confiruration
 alias bashconf="nvim \$HOME/.bashrc.user"
-alias inputconf="nvim \$HOME/.inputrc"
-alias tmuxconf="nvim \$HOME/.tmux.conf"
-alias gitconf="nvim \$HOME/.gitconfig"
+alias bashview="bat \$HOME/.bashrc.user"
 alias bashreload="source \$HOME/.bashrc.user"
+alias inputconf="nvim \$HOME/.inputrc"
+alias inputview="bat \$HOME/.inputrc"
+alias tmuxconf="nvim \$HOME/.tmux.conf"
 alias tmuxview="bat \$HOME/.tmux.conf"
+alias gitconf="nvim \$HOME/.gitconfig"
 alias gitview="bat \$HOME/.gitconfig"
 alias netrconf="nvim \$HOME/.netrc"
+alias netrview="bat \$HOME/.netrc"
 
 # working
 alias ll="_my_ll_command"
