@@ -3,3 +3,5 @@
 [user]
 	name = Hiep Phuc Thai
 	email = itmanagertph@gmail.com
+[alias]
+	diff1 = diff --cached
