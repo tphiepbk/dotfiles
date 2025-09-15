@@ -9,12 +9,11 @@ autocmd({ "FileType" }, {
 })
 
 -- Open NeoTree automatically
-autocmd({ "VimEnter" }, {
-    callback = function()
-        vim.schedule(function()
-            vim.cmd("Neotree")
-            vim.cmd("wincmd p")
-        end)
-    end,
-})
+-- autocmd({ "VimEnter" }, {
+--     callback = function()
+--         vim.schedule(function()
+--             vim.cmd("wincmd <leader> ")
+--         end)
+--     end,
+-- })
 
