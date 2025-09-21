@@ -228,7 +228,7 @@ function _generate_prompt_lite() {
     # Python venv part
     local python_venv_part
     if [[ "${VIRTUAL_ENV_PROMPT}" ]]; then
-        python_venv_part="${BLUE}(${VIRTUAL_ENV_PROMPT})${END_COLOR} "
+        python_venv_part="${PS_BLUE}(${VIRTUAL_ENV_PROMPT})${PS_END_COLOR} "
     else
         python_venv_part=""
     fi
