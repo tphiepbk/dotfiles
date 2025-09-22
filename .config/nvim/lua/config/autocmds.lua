@@ -8,12 +8,13 @@ autocmd({ "FileType" }, {
     end
 })
 
--- Open NeoTree automatically
--- autocmd({ "VimEnter" }, {
---     callback = function()
---         vim.schedule(function()
---             vim.cmd("wincmd <leader> ")
---         end)
---     end,
--- })
-
+-- Open NeoTree automatically when a buffer with realfile is open
+autocmd({ "BufReadPost" }, {
+    pattern = { "*" },
+    callback = function()
+        vim.schedule(function()
+            vim.cmd("Neotree reveal_force_cwd")
+            vim.cmd("wincmd p")
+        end)
+    end,
+})

@@ -5,7 +5,6 @@ return {
     "b0o/incline.nvim",
     dependencies = { "craftzdog/solarized-osaka.nvim" },
     event = "BufReadPre",
-    priority = 1200,
     config = function()
         require("incline").setup({
             highlight = {

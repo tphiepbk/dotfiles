@@ -1,4 +1,5 @@
 vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
 
 vim.scriptencoding = "utf-8"
 vim.opt.encoding = "utf-8"
@@ -56,9 +57,6 @@ vim.opt.formatoptions:append({ "r" })
 vim.opt.list = true
 vim.opt.listchars:append({ trail = "~" })
 
-vim.cmd([[au BufNewFile,BufRead *.astro setf astro]])
-vim.cmd([[au BufNewFile,BufRead Podfile setf ruby]])
-
 -- Highlights
 local namespace = vim.api.nvim_create_namespace("colorization")
 vim.api.nvim_set_hl_ns(namespace)
@@ -68,6 +66,6 @@ vim.api.nvim_set_hl(namespace, "Search", {fg="#00ff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "NonText", {fg="#767676", bg="None"})
 vim.api.nvim_set_hl(namespace, "SignColumn", {fg="#080808", bg="None"})
 
--- Disable all animations
+-- Disable all animation
 vim.g.snacks_animate = false
 

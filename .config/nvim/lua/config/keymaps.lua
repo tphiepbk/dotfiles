@@ -24,10 +24,11 @@ vim.keymap.set("n", "ss", "<cmd>split<cr>")
 vim.keymap.set("n", "sv", "<cmd>vsplit<cr>")
 
 -- Move window
-vim.keymap.set("n", "sh", "<C-w>h")
-vim.keymap.set("n", "sk", "<C-w>k")
-vim.keymap.set("n", "sl", "<C-w>l")
-vim.keymap.set("n", "sj", "<C-w>j")
+vim.keymap.set("n", "sh", "<cmd>wincmd h<cr>")
+vim.keymap.set("n", "sj", "<cmd>wincmd j<cr>")
+vim.keymap.set("n", "sk", "<cmd>wincmd k<cr>")
+vim.keymap.set("n", "sl", "<cmd>wincmd l<cr>")
+vim.keymap.set("n", "sp", "<cmd>wincmd p<cr>")
 
 -- Better resize window
 local resize = require("winresize").resize
@@ -40,6 +41,21 @@ vim.keymap.set("n", "<C-Down>", function() resize(0, 1, "down") end, opts)
 vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 
+-- Neotree
+local function neotree_toggle_reveal()
+    vim.schedule(function ()
+        vim.cmd("Neotree toggle reveal")
+        vim.cmd("wincmd p")
+    end)
+end
+local neotree_toggle_reveal_opts = opts
+neotree_toggle_reveal_opts.desc = "Neotree toggle reveal"
+vim.keymap.set("n", "<Leader>e", neotree_toggle_reveal, neotree_toggle_reveal_opts)
+vim.keymap.del("n", "<Leader>fe")
+vim.keymap.del("n", "<Leader>E")
+vim.keymap.del("n", "<Leader>fE")
+vim.keymap.del("n", "<Leader>fF")
+
 -- Quit and save
 vim.keymap.set("n", "<Leader>qq", ":q<cr>", opts)
 vim.keymap.set("n", "<Leader>qa", ":qa<cr>", opts)
@@ -48,5 +64,5 @@ vim.keymap.set("n", "<Leader>ww", ":w!<cr>", opts)
 
 -- Fix bug with "s" key
 -- When s is pressed, the previous character is deleted and insert mode is triggered
-vim.keymap.set("n", "s", "<Nop>", opts)
+vim.keymap.set("n", "s", "<nop>", opts)
 

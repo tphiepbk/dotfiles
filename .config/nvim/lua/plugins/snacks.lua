@@ -1,8 +1,8 @@
 local logo = [[
 ████████╗██████╗ ██╗  ██╗██╗███████╗██████╗ ██████╗ ██╗  ██╗
 ╚══██╔══╝██╔══██╗██║  ██║██║██╔════╝██╔══██╗██╔══██╗██║ ██╔╝
-   ██║   ██████╔╝███████║██║█████╗  ██████╔╝██████╔╝█████╔╝ 
-   ██║   ██╔═══╝ ██╔══██║██║██╔══╝  ██╔═══╝ ██╔══██╗██╔═██╗ 
+   ██║   ██████╔╝███████║██║█████╗  ██████╔╝██████╔╝█████╔╝
+   ██║   ██╔═══╝ ██╔══██║██║██╔══╝  ██╔═══╝ ██╔══██╗██╔═██╗
    ██║   ██║     ██║  ██║██║███████╗██║     ██████╔╝██║  ██╗
    ╚═╝   ╚═╝     ╚═╝  ╚═╝╚═╝╚══════╝╚═╝     ╚═════╝ ╚═╝  ╚═╝
 ]]
@@ -13,10 +13,15 @@ return {
         {"nvim-mini/mini.nvim"},
         {"nvim-tree/nvim-web-devicons"},
     },
+    -- Reconfig keymap
+    keys = {
+        { "<leader><space>", function() Snacks.picker.files({cwd = vim.fn.getcwd()}) end, desc = "Find Files (cwd)" },
+        { "<leader>ff", function() Snacks.picker.files({cwd = vim.fn.getcwd()}) end, desc = "Find Files (cwd)" },
+        { "<leader>/", function() Snacks.picker.grep({cwd = vim.fn.getcwd()}) end, desc = "Grep (cwd)" },
+    },
     opts = {
         -- Configure dashboard
         dashboard = {
-            enabled = true,
             preset = {
                 header = logo,
                 -- Define the keys preset to override the default one,
@@ -71,11 +76,20 @@ return {
         },
         -- Configure explorer
         explorer = {
-            replace_netrw = true
+            enabled = false,
         },
-        -- Configure statuscolumn
-        statuscolumn = {
-            enabled=true
+        -- Configure picker
+        picker = {
+            sources = {
+                files = {
+                    hidden = true,
+                    ignored = true,
+                }
+            }
+        },
+        -- Configure picker
+        scroll = {
+            enabled = false,
         }
     },
 }
