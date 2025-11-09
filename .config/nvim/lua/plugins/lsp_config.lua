@@ -1,21 +1,14 @@
 return {
     "neovim/nvim-lspconfig",
-    init = function()
-        local keys = require("lazyvim.plugins.lsp.keymaps").get()
-        keys[#keys + 1] = {
-            "gd",
-            function()
-                -- DO NOT RESUSE WINDOW
-                require("telescope.builtin").lsp_definitions({ reuse_win = false })
-            end,
-            desc = "Goto Definition",
-            has = "definition",
-        }
-    end,
     opts = {
         inlay_hints = { enabled = false },
-        ---@type lspconfig.options
         servers = {
+            -- Keymap
+            ['*'] = {
+                keys = {
+                    {"gd", "<cmd>lua vim.lsp.buf.definition()<CR>", has = "definition"},
+                },
+            },
             cssls = {},
             tailwindcss = {
                 root_dir = function(...)

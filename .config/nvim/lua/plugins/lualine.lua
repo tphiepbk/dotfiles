@@ -11,8 +11,8 @@ return {
             -- section_separators = { right = '', left = '' },
             section_separators = { left = '', right = '' },
 
-            component_separators = { left = '', right = '' },
-            -- component_separators = "",
+            -- component_separators = { left = '', right = '' },
+            component_separators = { left = '', right = '' },
 
             disabled_filetypes = {},
             globalstatus = true
