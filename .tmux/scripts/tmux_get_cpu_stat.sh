@@ -4,8 +4,7 @@ PERCENT_FREE=
 PERCENT_FREE=$(top -bn 1 | grep "%Cpu(s):" | cut -d "," -f 4 | sed 's/[a-z ]*//g')
 
 PERCENT_USED=
-# PERCENT_USED=$(printf '%3.2f\n' $(bc<<<100-${PERCENT_FREE}))
-PERCENT_USED=$(printf '%3.1f\n' $(bc<<<100-${PERCENT_FREE}))
+PERCENT_USED=$(printf '%3.1f\n' "$(bc<<<100-"${PERCENT_FREE}")")
 
 TYPE="$1"
 
