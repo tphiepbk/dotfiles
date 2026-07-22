@@ -40,6 +40,7 @@ vim.opt.wildoptions = 'pum'
 vim.opt.pumblend = 5
 vim.opt.background = 'dark'
 vim.opt.cmdheight = 0
+vim.opt.backupcopy = 'yes'
 
 -- Undo config
 -- These values match with basic Vim
@@ -61,6 +62,7 @@ vim.opt.listchars:append({ trail = "~" })
 local namespace = vim.api.nvim_create_namespace("colorization")
 vim.api.nvim_set_hl_ns(namespace)
 vim.api.nvim_set_hl(namespace, "LineNr", {fg="#af00af", bg="None"})
+vim.api.nvim_set_hl(namespace, "WinSeparator", {fg="#ff8700", bg="None"})
 vim.api.nvim_set_hl(namespace, "CursorLineNr", {fg="#5fff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "Search", {fg="#00ff00", bg="None"})
 vim.api.nvim_set_hl(namespace, "NonText", {fg="#767676", bg="None"})
@@ -68,4 +70,3 @@ vim.api.nvim_set_hl(namespace, "SignColumn", {fg="#080808", bg="None"})
 
 -- Disable all animation
 vim.g.snacks_animate = false
-
