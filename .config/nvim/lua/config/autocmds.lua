@@ -18,3 +18,11 @@ autocmd({ "BufReadPost" }, {
         end)
     end,
 })
+
+-- Set the filetype to dockerfile when the filename contains Dockerfile string
+vim.cmd([[
+    augroup _customdockerfilename
+        autocmd!
+        autocmd BufRead,BufEnter *Dockerfile* set filetype=dockerfile
+    augroup end
+]])
