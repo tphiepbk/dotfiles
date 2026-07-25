@@ -13,19 +13,10 @@
 # ========================================================== DEFAULT EXPORT =====================================================================
 
 export LESS="-XRI"
-export EDITOR=vim
+export EDITOR=/usr/bin/vim
 
 # tmux tmp dir
 export TMUX_TMPDIR="$HOME/.tmux"
-
-# cargo
-# shellcheck source="/dev/null"
-source "$HOME/.cargo/env"
-
-# my common scripts
-if [[ ! "$PATH" == *"$HOME/.scripts"* ]]; then
-    export PATH="$HOME/.scripts:$PATH"
-fi
 
 # nodejs
 export NVM_DIR="$HOME/.nvm"
@@ -36,7 +27,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # ========================================================== DEFAULT OPTIONS =====================================================================
 
-_EZA_COMMON_OPTS=("--long" "--classify=always" "--color=always" "--icons=always" "--all" "--all" "--binary" "--group" "--mounts" "--modified")
+_EZA_COMMON_OPTS=("--long" "--classify=always" "--color=always" "--icons=auto" "--all" "--all" "--binary" "--group" "--mounts" "--modified")
 
 # This will fix issue when FZF preview does not recognize time style option format
 _EZA_LIST_OPTS=("${_EZA_COMMON_OPTS[@]}" "--time-style=+%a %d-%m-%Y %H:%M:%S")
@@ -957,7 +948,6 @@ alias cdi="_cd_fzf_utility"
 alias working='cd $HOME/workspace'
 alias gitroot='cd "$(git root)"'
 alias dt='delta --side-by-side --diff-args=-U999'
-#alias gl='glow --tui --line-numbers --preserve-new-lines -w $COLUMNS'
 alias gl='glow --pager --preserve-new-lines -w $COLUMNS'
 
 # start tmux
@@ -967,7 +957,3 @@ alias tux="_start_tmux_utility"
 alias brfconf="_my_brf_command"
 complete -W "backup restore" brfconf
 
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export VIRTUALENVWRAPPER_VIRTUALENV=/usr/local/bin/virtualenv
-# shellcheck source=/dev/null
-source /usr/local/bin/virtualenvwrapper.sh
