@@ -4,14 +4,14 @@
 
 + Windows Subsystem for Linux (WSL)
 + Distro: openSUSE-Tumbleweed
-+ RAM: 2GB
-+ WSL configuration file on Windows: `C:\Users\thanh\.wslconfig`
++ RAM: 8GB
++ WSL configuration file on Windows: `C:\Users\tphiepbk\.wslconfig`
 ```
 [wsl2]
 processors=4
-memory=6442450944
-swap=1073741824
-defaultVhdSize=53687091200
+memory=8589934592
+swap=2147483648
+nestedVirtualization=true
 ```
 
 + WSL configuration file on the distro (Ubuntu): `/etc/wsl.conf`
@@ -27,13 +27,60 @@ appendWindowsPath=false
 
 ***zypper packages***
 
-`sudo zypper install python3.10-venv python3-pip ruby-full bc`
-
-***pip packages***
-
-`pip install neovim`
+```
+sudo zypper install python313 \
+    neovim \
+    eza \
+    bat \
+    fzf \
+    ripgrep \
+    fd \
+    glow \
+    xclip \
+    gcc16 \
+    gcc16-c++ \
+    git \
+    python313-virtualenvwrapper \
+    docker \
+    tmux \
+    fzf-tmux \
+    bc \
+    lazygit \
+    gcc \
+    gcc-c++ \
+    make \
+    htop \
+    python313-csvkit \
+    file \
+    ShellCheck \
+    stress-ng \
+    lsb-release \
+    kvm_server \
+    kvm_tools \
+    libvirt-daemon \
+    libvirt-daemon-driver-nwfilter \
+    bridge-utils \
+    virt-viewer \
+    libguestfs \
+    kernel-default \
+    gdb \
+    k3s-install \
+    ImageMagick \
+    python313-pip \
+    python313-neovim \
+    libevent-devel \
+    ncurses-devel \
+    bison \
+    docker-compose \
+    aws-cli \
+    jq \
+    cmake \
+    rust \
+    lua51
+```
 
 ***nodejs***
+
 + https://nodejs.org/en/download/package-manager
 + Use "nvm" to install
 
@@ -41,71 +88,40 @@ appendWindowsPath=false
 
 `npm install -g neovim@latest tree-sitter-cli@latest`
 
-***rust***
-+ https://www.rust-lang.org/tools/install
-
-***gem packages***
-
-`gem install neovim`
-
 ***docker***
 + https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 + Add current user to *docker* group: `sudo usermod -a -G docker tphiepbk`
 
-## External opensource utilities
-
-+ ***lsd***: The next gen ls command - https://github.com/lsd-rs/lsd
-+ ***bat***: A cat(1) clone with wings - https://github.com/sharkdp/bat
-+ ***fzf***: A command-line fuzzy finder - https://github.com/junegunn/fzf
-+ ***ripgrep***: ripgrep recursively searches directories for a regex pattern while respecting your gitignore - https://github.com/BurntSushi/ripgrep
-+ ***fd***: A simple, fast and user-friendly alternative to 'find' - https://github.com/sharkdp/fd
-+ ***glow***: Render markdown on the CLI, with pizzazz! - https://github.com/charmbracelet/glow
-
-## Neovim (version 0.10.1)
-
-https://github.com/neovim/neovim
-
-Use the "nvim-linux64.tar.gz" under "Releases" section
+## Neovim (version 0.12.5)
 
 Use ***lazyvim*** - http://www.lazyvim.org/ for all configurations.
 
 ***Directory*** structure
 
 /home/tphiepbk/.config/nvim</br>
-├── lazyvim.json</br>
-├── README.md</br>
-├── .neoconf.json</br>
-├── lua</br>
-│   ├── plugins</br>
-│   │   ├── telescope.lua</br>
-│   │   ├── dashboard.lua</br>
-│   │   ├── bufferline.lua</br>
-│   │   ├── indentscope.lua</br>
-│   │   ├── noice.lua</br>
-│   │   ├── breadcrumb.lua</br>
-│   │   ├── highlight_patterns.lua</br>
-│   │   ├── neotree.lua</br>
-│   │   ├── tokyonight.lua</br>
-│   │   ├── treesitter.lua</br>
-│   │   ├── _disabled_plugins.lua</br>
-│   │   ├── lualine.lua</br>
-│   │   ├── lsp_config.lua</br>
-│   │   ├── incline.lua</br>
-│   │   ├── winresize.lua</br>
-│   │   ├── autosave.lua</br>
-│   │   ├── git.lua</br>
-│   │   ├── notify.lua</br>
-│   │   └── mason.lua</br>
-│   └── config</br>
-│       ├── options.lua</br>
-│       ├── keymaps.lua</br>
-│       ├── autocmds.lua</br>
-│       └── lazy.lua</br>
-├── init.lua</br>
 ├── lazy-lock.json</br>
-├── LICENSE</br>
-├── stylua.toml</br>
-└── .luarc.json</br>
+├── lazyvim.json</br>
+├── init.lua</br>
+└── lua</br>
+    ├── config</br>
+    │   ├── lazy.lua</br>
+    │   ├── options.lua</br>
+    │   ├── autocmds.lua</br>
+    │   └── keymaps.lua</br>
+    └── plugins</br>
+        ├── flash_disabled.lua</br>
+        ├── colorscheme.lua</br>
+        ├── noice.lua</br>
+        ├── bufferline.lua</br>
+        ├── highlight_patterns.lua</br>
+        ├── incline.lua</br>
+        ├── breadcrumb.lua</br>
+        ├── neotree.lua</br>
+        ├── lsp_config.lua</br>
+        ├── snacks.lua</br>
+        ├── winresize.lua</br>
+        ├── lualine.lua</br>
+        └── autosave.lua</br>
 
 ## Keymaps
 
