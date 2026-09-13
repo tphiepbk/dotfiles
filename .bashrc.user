@@ -84,14 +84,20 @@ function _clear_directory_history() {
     fi
 }
 
+function _prepare_directory_history() {
+    if [[ -f "${DIRECTORY_HISTORY_FILE}" ]]; then
+        _remove_non_existent_directory
+        _clear_directory_history
+        _store_current_directory
+    else
+        touch "${DIRECTORY_HISTORY_FILE}"
+    fi
+}
+
 function _prompt_command () {
     local EXIT="$?"
 
-    _remove_non_existent_directory
-
-    _clear_directory_history
-
-    _store_current_directory
+    _prepare_directory_history
 
     # Redundant line before prompt
     echo
@@ -956,4 +962,23 @@ alias tux="_start_tmux_utility"
 # backup restore utility
 alias brfconf="_my_brf_command"
 complete -W "backup restore" brfconf
+
+# ========================================================== PROJECTS =====================================================================
+
+# Secondshift project
+TARGET_SCRIPT_DIR="$HOME/workspace/SecondShift/docker_build/scripts/"
+if ! (echo "$PATH" | tr ':' '\n' | grep -Fx "${TARGET_SCRIPT_DIR}") > /dev/null; then
+    export PATH="$PATH:${TARGET_SCRIPT_DIR}"
+    exec bash
+fi
+
+# AWS
+function _ssh_aws () {
+    local IP="$1"
+    local USER="$2"
+    [[ -z "$USER" ]] && USER="ec2-user"
+    local KEY_PEM="$HOME/.ssh/EC2Tutorial.pem"
+    ssh -i "${KEY_PEM}" "$USER"@"$IP"
+}
+alias sshaws="_ssh_aws"
 
