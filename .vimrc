@@ -33,8 +33,7 @@ nnoremap <Leader>qa :qa<CR>
 nnoremap <Leader>wq :wq<CR>
 let loaded_matchparen = 1
 set list
-set listchars=trail:Â·,lead:Â·,tab:>-
-colorscheme default
+set listchars=trail:·,lead:·,tab:>-
 highlight Normal guibg=NONE ctermbg=NONE
 highlight NonText guibg=NONE ctermbg=NONE
 highlight SpecialKey ctermfg=gray ctermbg=NONE guifg=red guibg=NONE

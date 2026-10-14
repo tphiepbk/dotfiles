@@ -966,10 +966,9 @@ complete -W "backup restore" brfconf
 # ========================================================== PROJECTS =====================================================================
 
 # Secondshift project
-TARGET_SCRIPT_DIR="$HOME/workspace/SecondShift/docker_build/scripts/"
+TARGET_SCRIPT_DIR="$HOME/workspace/dedicated_env_SecondShift/scripts"
 if ! (echo "$PATH" | tr ':' '\n' | grep -Fx "${TARGET_SCRIPT_DIR}") > /dev/null; then
     export PATH="$PATH:${TARGET_SCRIPT_DIR}"
-    exec bash
 fi
 
 # AWS
@@ -977,8 +976,11 @@ function _ssh_aws () {
     local IP="$1"
     local USER="$2"
     [[ -z "$USER" ]] && USER="ec2-user"
-    local KEY_PEM="$HOME/.ssh/EC2Tutorial.pem"
+    local KEY_PEM="$HOME/.ssh/ec2_ap_southeast_1.pem"
     ssh -i "${KEY_PEM}" "$USER"@"$IP"
 }
 alias sshaws="_ssh_aws"
+
+export WORKON_HOME=$HOME/.virtualenvs
+source "/usr/bin/virtualenvwrapper-3.13"
 
